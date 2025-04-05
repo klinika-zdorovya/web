@@ -19,10 +19,10 @@
     <div class="flex flex-1 mt-16 md:mt-0">
       <!-- Боковое меню -->
       <nav
-          class="fixed md:relative md:h-full transform transition-transform duration-300 ease-in-out
-               w-[70vw] md:w-64 h-[calc(100vh-4rem)]
+          class="fixed md:sticky md:top-0 transform transition-transform duration-300 ease-in-out
+               w-[70vw] md:w-72 h-[calc(100vh-4rem)] md:h-[calc(100vh-80px)]
                bg-white shadow-md z-30
-               md:translate-x-0 -translate-x-full"
+               md:translate-x-0 -translate-x-full md:overflow-x-auto"
           :class="{ 'translate-x-0': isMenuOpen }"
       >
         <div class="h-full flex flex-col">
@@ -30,7 +30,6 @@
             <div class="hidden md:block mb-8">
               <NuxtLink to="/" class="text-xl font-bold text-blue-600">Клиника Здоровья</NuxtLink>
             </div>
-
             <ul class="space-y-2">
               <NavigationItem
                   v-for="link in navigation"
@@ -162,4 +161,6 @@ const navigation = [
 body.menu-open {
   overflow: hidden;
 }
+
+
 </style>

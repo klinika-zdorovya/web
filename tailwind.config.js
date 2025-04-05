@@ -72,6 +72,10 @@ export default {
             spacing: {
                 'nav': '4rem',
                 'section_x': '5rem',
+            },
+            height: {
+                'screen-16': 'calc(100vh - 4rem)',
+                'screen-80': 'calc(100vh - 80px)'
             }
         },
     },
