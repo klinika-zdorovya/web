@@ -4,8 +4,12 @@
 
 html {
     scroll-behavior: smooth;
-    @apply bg-background text-color-typography;
+    @apply bg-background ;
     /*@apply dark:bg-background__dark  dark:text-color-typography__dark;*/
+}
+
+body.menu-open {
+    overflow: hidden;
 }
 
 /* Headings */

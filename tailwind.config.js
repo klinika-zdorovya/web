@@ -12,15 +12,14 @@ export default {
     theme: {
         extend: {
             colors: {
-/*
-                'brand_primary': '#124BCF',
-                'brand_secondary': '#5eceeb',
-                'brand_secondary_saturated': '#5eceeb',
-                'typography_primary': '#000000',
-*/
+                /*'background__dark': '#20201F',*/
 
-                'background': '#ffffff',
-                'background__dark': '#20201F',
+                'background': '#F3F8F8',
+                'background-brand': '#144044',
+                'background-brand-dark': '#092325',
+                'background-brand-light': '#1A5A60',
+                'background-block': '#EFF4F4',
+                'background-block-hover': '#e7eded',
 
                 'color-typography': '#262626',
                 'color-typography__dark': '#EAEAEA',
@@ -72,11 +71,18 @@ export default {
             spacing: {
                 'nav': '4rem',
                 'section_x': '5rem',
+                '256': '64rem', // 1024px для отступа меню
             },
             height: {
                 'screen-16': 'calc(100vh - 4rem)',
                 'screen-80': 'calc(100vh - 80px)'
-            }
+            },
+            screens: {
+                '3xl': '1600px',
+            },
+            maxWidth: {
+                'screen-3xl': '1600px',
+            },
         },
     },
     plugins: [],

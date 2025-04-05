@@ -2,7 +2,7 @@
   <li>
     <NuxtLink
         :to="item.path"
-        class="block px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg"
+        class="block px-1 py-0.5 text-gray-700 hover:bg-blue-50 rounded-sm"
         :class="{
         'bg-blue-100 font-semibold': $route.path === item.path,
         'pl-8': level > 0
@@ -11,7 +11,7 @@
       {{ item.title }}
     </NuxtLink>
 
-    <ul v-if="item.children" class="space-y-2 mt-2">
+    <ul v-if="item.children" class="space-y-1">
       <NavigationItem
           v-for="child in item.children"
           :key="child.path"

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col">
+  <div class="container min-h-screen flex flex-col max-w-screen-xl m-auto">
     <!-- Шапка -->
     <header class="bg-white shadow-md fixed w-full top-0 z-40 md:hidden">
       <div class="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -20,16 +20,16 @@
       <!-- Боковое меню -->
       <nav
           class="fixed md:sticky md:top-0 transform transition-transform duration-300 ease-in-out
-               w-[70vw] md:w-72 h-[calc(100vh-4rem)] md:h-[calc(100vh-80px)]
-               bg-white shadow-md z-30
+               w-[70vw] md:w-72 h-[calc(100vh-4rem)] md:h-[calc(100vh-69px)]
+               bg-background-block shadow-md z-30
                md:translate-x-0 -translate-x-full md:overflow-x-auto"
           :class="{ 'translate-x-0': isMenuOpen }"
       >
         <div class="h-full flex flex-col">
-          <div class="p-4 flex-1">
-            <div class="hidden md:block mb-8">
-              <NuxtLink to="/" class="text-xl font-bold text-blue-600">Клиника Здоровья</NuxtLink>
-            </div>
+          <div class="left-column hidden md:block mb-8 bg-background-brand-light min-h-28">
+            <NuxtLink to="/" class="text-xl font-bold text-blue-600">Клиника Здоровья</NuxtLink>
+          </div>
+          <div class="flex-1 overflow-auto">
             <ul class="space-y-2">
               <NavigationItem
                   v-for="link in navigation"
@@ -60,11 +60,11 @@
 
       <!-- Основное содержимое -->
       <main class="flex-1 overflow-auto">
-        <div class="container mx-auto px-4 py-6">
+        <div class="container">
           <!-- Хлебные крошки -->
-          <Breadcrumbs class="mb-6" />
+          <Breadcrumbs class="hidden md:block bg-background-brand min-h-28" />
 
-          <div class="prose max-w-none">
+          <div class="prose max-w-none mx-auto px-4 py-6">
             <slot />
           </div>
         </div>
@@ -72,10 +72,10 @@
     </div>
 
     <!-- Футер -->
-    <footer class="bg-gray-800 text-white mt-auto">
+    <footer class="bg-background-brand-dark text-white mt-auto">
       <div class="container mx-auto px-4 py-6">
         <div class="text-center text-sm">
-          © {{ new Date().getFullYear() }} Клиника Здоровья. Все права защищены.
+          © 2011-{{ new Date().getFullYear() }} Клиника Здоровья. Все права защищены.
         </div>
       </div>
     </footer>
@@ -156,11 +156,5 @@ const navigation = [
    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
    transition-duration: 300ms;
  }
-
-/* Скрытие скролла при открытом меню */
-body.menu-open {
-  overflow: hidden;
-}
-
 
 </style>
