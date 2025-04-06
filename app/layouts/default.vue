@@ -16,7 +16,7 @@
     </header>
 
     <!-- Основной контент и меню -->
-    <div class="flex flex-1 mt-16 md:mt-0">
+    <div class="flex flex-1 md:mt-0">
       <!-- Боковое меню -->
       <nav
           class="fixed md:sticky md:top-0 transform transition-transform duration-300 ease-in-out
@@ -26,7 +26,7 @@
           :class="{ 'translate-x-0': isMenuOpen }"
       >
         <div class="h-full flex flex-col">
-          <div class="left-column hidden md:block mb-8 bg-background-brand-light min-h-28">
+          <div class="left-column hidden md:block bg-background-brand-light min-h-28">
             <NuxtLink to="/" class="text-xl font-bold text-blue-600">Клиника Здоровья</NuxtLink>
           </div>
           <div class="flex-1 overflow-auto">
@@ -59,12 +59,12 @@
       ></div>
 
       <!-- Основное содержимое -->
-      <main class="flex-1 overflow-auto">
+      <main class="flex-1 bg-background-content">
         <div class="container">
           <!-- Хлебные крошки -->
-          <Breadcrumbs class="hidden md:block bg-background-brand min-h-28" />
+          <Breadcrumbs class="hidden md:flex md:fixed md:top-0 bg-background-brand pl-4 min-h-28 w-full max-w-[992px]" />
 
-          <div class="prose max-w-none mx-auto px-4 py-6">
+          <div class="prose max-w-none mx-auto px-4 md:mt-8">
             <slot />
           </div>
         </div>

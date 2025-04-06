@@ -15,6 +15,9 @@ export default {
                 /*'background__dark': '#20201F',*/
 
                 'background': '#F3F8F8',
+                'background-content': '#FAFAFA',
+
+
                 'background-brand': '#144044',
                 'background-brand-dark': '#092325',
                 'background-brand-light': '#1A5A60',

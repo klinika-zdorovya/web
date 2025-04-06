@@ -1,5 +1,6 @@
 <template>
-  <nav class="text-sm">
+  <nav class="flex text-sm flex-col items-start justify-center">
+    <h3 class="mt-0">{{ title }}</h3>
     <ol class="flex space-x-2">
       <li v-for="(crumb, index) in crumbs" :key="crumb.path">
         <NuxtLink
@@ -32,5 +33,10 @@ const crumbs = computed(() => {
   })
 
   return [{ title: 'Главная', path: '/' }, ...breadcrumbs]
+})
+
+const title = computed(() => {
+  const lastElement = crumbs.value[crumbs.value.length - 1];
+  return lastElement?.title || '';
 })
 </script>
