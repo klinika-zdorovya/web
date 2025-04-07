@@ -1,0 +1,64 @@
+body:
+  - title: Клиника
+    fullTitle: Клиника
+    path: /clinic/
+    children:
+      - title: О клинике
+        fullTitle: О клинике
+        path: /clinic/about/
+      - title: История создания
+        fullTitle: История создания
+        path: /clinic/history/
+      - title: Наши специалисты
+        fullTitle: Наши специалисты
+        path: /clinic/doctors/
+      - title: Документы
+        fullTitle: Документы
+        path: /clinic/documents/
+      - title: Наш манифест
+        fullTitle: Наш манифест
+        path: /clinic/manifest/
+
+  - title: Направления
+    fullTitle: Направления
+    path: /dimensions/
+    children:
+      - title: Лечебная физкультура
+        fullTitle: Лечебная физкультура
+        path: /dimensions/physculture/
+      - title: Реабилитация пациентов с неврологическими заболеваниями
+        fullTitle: Реабилитация пациентов с неврологическими заболеваниями
+        path: /dimensions/reabilitation/
+      - title: Обеспечение спортивных мероприятий
+        fullTitle: Обеспечение спортивных мероприятий
+        path: /dimensions/provision/
+      - title: Терапевтическое направление
+        fullTitle: Терапевтическое направление
+        path: /dimensions/therapy/
+
+  - title: Посетителям и пациентам
+    fullTitle: Посетителям и пациентам
+    path: /patients/
+    children:
+      - title: Полезные советы
+        fullTitle: Полезные советы
+        path: /patients/useful-tips/
+      - title: Ортопедическая продукция
+        fullTitle: Ортопедическая продукция
+        path: /patients/orthopedic-products/
+
+  - title: Цены
+    fullTitle: Цены на услуги
+    path: /pricelist/
+
+  - title: Публикации
+    fullTitle: Публикации
+    path: /publications/
+
+  - title: Вопрос–ответ
+    fullTitle: Вопрос–ответ
+    path: /questions/
+
+  - title: Контактная информация
+    fullTitle: Контактная информация
+    path: /contacts/

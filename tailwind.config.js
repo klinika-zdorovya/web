@@ -24,6 +24,17 @@ export default {
                 'background-block': '#EFF4F4',
                 'background-block-hover': '#e7eded',
 
+                'background-brand-green': '#1baf72',
+                'background-brand-green-hover': '#1ba86e',
+
+                // тексты меню, заголовков, тайтлов
+                'brand-light': '#174f54',
+
+                'divider': '#e0e8e9',
+                'divider-green': '#27b379',
+
+
+
                 'color-typography': '#262626',
                 'color-typography__dark': '#EAEAEA',
             },
@@ -85,6 +96,9 @@ export default {
             },
             maxWidth: {
                 'screen-3xl': '1600px',
+            },
+            transitionProperty: {
+                'transform': 'transform'
             },
         },
     },
