@@ -12,7 +12,7 @@ if (!page.value) {
 
 <template>
   <ContentRenderer
-    v-if="page"
-    :value="page"
+      v-if="page"
+      :value="page"
   />
 </template>

@@ -12,6 +12,10 @@ body.menu-open {
     overflow: hidden;
 }
 
+body {
+    @apply text-base leading-7 text-color-typography font-proxima-nova;
+}
+
 /* Headings */
 
 h1 {
@@ -58,7 +62,7 @@ h5 {
 
 /* Body Text */
 p {
-    @apply text-base leading-base mb-2;
+    @apply text-base leading-7 mb-4;
 }
 
 /* Анимация для мобильного меню */

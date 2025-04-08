@@ -19,9 +19,6 @@ const {navigation} = defineProps({
   }
 })
 
-onMounted(()=> {
-  console.log('#', navigation)
-})
 </script>
 
 <style scoped>

@@ -20,7 +20,6 @@ export default {
 
                 'background-brand': '#144044',
                 'background-brand-dark': '#092325',
-                'background-brand-light': '#1A5A60',
                 'background-block': '#EFF4F4',
                 'background-block-hover': '#e7eded',
 
@@ -29,14 +28,27 @@ export default {
 
                 // тексты меню, заголовков, тайтлов
                 'brand-light': '#174f54',
+                'brand-ultra-light': '#C2F8E2',
 
                 'divider': '#e0e8e9',
                 'divider-green': '#27b379',
 
 
 
-                'color-typography': '#262626',
-                'color-typography__dark': '#EAEAEA',
+                'color-typography': '#434343',
+
+            },
+
+            fontFamily: {
+                'spb': ['Petersburg Cyrillic', 'sans-serif'],
+                'proxima-nova': ['Proxima Nova', 'sans-serif'],
+            },
+            fontWeight: {
+                light: 300,
+                normal: 400,
+                bold: 700,
+                extrabold: 800,
+                black: 900
             },
             fontSize: {
                 'xxs': '0.5rem',

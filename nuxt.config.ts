@@ -5,7 +5,10 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
   ],
   devtools: { enabled: true },
-  css: ['./app/assets/css/main.css'],
+  css: [
+      './app/assets/css/main.css',
+      './app/assets/scss/main.scss',
+  ],
   future: {
     compatibilityVersion: 4,
   },

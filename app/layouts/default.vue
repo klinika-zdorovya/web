@@ -1,9 +1,11 @@
 <template>
-  <div class="container min-h-screen flex flex-col max-w-screen-xl m-auto">
-    <!-- Шапка -->
-    <header class="bg-white shadow-md fixed w-full top-0 z-40 md:hidden">
+  <div class="container min-h-screen flex flex-col m-auto">
+    <!-- Шапка для мобильной версии -->
+    <header class="bg-white shadow-md fixed w-full z-40 md:hidden">
       <div class="container mx-auto px-4 h-16 flex items-center justify-between">
-        <NuxtLink class="text-xl font-bold text-blue-600" to="/">Клиника Здоровья</NuxtLink>
+        <NuxtLink class="text-xl font-bold text-blue-600 " to="/">
+          Клиника Здоровья
+        </NuxtLink>
         <button
             class="p-2 focus:outline-none md:hidden"
             @click="isMenuOpen = !isMenuOpen"
@@ -20,15 +22,14 @@
       <!-- Боковое меню -->
       <nav
           :class="{ 'translate-x-0': isMenuOpen }"
-          class="fixed md:sticky md:top-0 transform transition-transform duration-300 ease-in-out
-               w-[70vw] md:w-72 h-[calc(100vh-4rem)] md:h-[calc(100vh-69px)]
-               bg-background-block shadow-md z-30
+          class="fixed md:relative transform transition-transform duration-300 ease-in-out
+               w-[70vw] md:w-[270px] bg-background-block shadow-lg z-30 h-full
                md:translate-x-0 -translate-x-full overflow-auto md:overflow-visible"
       >
-        <div class="h-full flex flex-col">
+        <div class="h-full min-h-[calc(100vh - 76px)] flex-col">
           <LeftPanelLogo />
           <LeftPanelNavigation :navigation="navigation" />
-          <LeftPanelBottomInfo />
+          <LeftPanelBottomInfo class="md:hidden" />
         </div>
       </nav>
 
@@ -43,10 +44,18 @@
       <main class="flex-1 bg-background-content">
         <div class="container">
           <!-- Хлебные крошки -->
-          <Breadcrumbs class="hidden md:flex md:fixed md:top-0 bg-background-brand pl-4 min-h-28 w-full max-w-[992px]"/>
+          <Breadcrumbs
+              :navigation="navigation"
+              class="hidden md:flex bg-background-brand pl-4 min-h-32 w-full"
+          />
 
-          <div class="prose max-w-none mx-auto px-4 mt-8 md:mt-28">
-            <slot/>
+          <div class="prose max-w-none mx-auto px-4 my-8 md:px-16 leading-7 min-h-[calc(100vh-268px)]">
+              <transition mode="out-in" name="content-fade">
+                <div class="content-wrapper" :key="$route.path">
+                  <slot />
+                </div>
+              </transition>
+
           </div>
         </div>
       </main>
@@ -114,6 +123,20 @@ onBeforeUnmount(() => {
 </script>
 
 <style>
+.content-fade-enter-active,
+.content-fade-leave-active {
+  transition: opacity 0.30s, transform 0.1s;
+}
 
-
+.content-fade-enter-from,
+.content-fade-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
 </style>
+
+
+
+То есть, как видишь, шрифт определяется как petersburg-web. Хз, что это за шрифт, может, переименованный, может, редкий, может плохо искал, может, нет в бесплатном доступе. Ну, не суть. Пытаюсь подобрать подходящий, взял шрифт "Petersburg Cyrillic". Вроде, и близок, но как будто не так, у меня с глазомером то тут не очень, но, кажется, начертание не то, а других нет.
+
+Может, посоветуешь какой-нибудь шрифт такого плана. То есть, навскидку, что то типа: "университет" + "засечки". Не знаю, как правильно сформулировать
