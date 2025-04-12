@@ -29,7 +29,6 @@
         <div class="h-full min-h-[calc(100vh - 76px)] flex-col">
           <LeftPanelLogo />
           <LeftPanelNavigation :navigation="navigation" />
-          <LeftPanelBottomInfo class="md:hidden" />
         </div>
       </nav>
 

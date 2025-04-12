@@ -1,8 +1,10 @@
-# Nuxt Content Starter
-
-Look at the [Nuxt Content documentation](https://content.nuxt.com) to learn more.
-
-## Setup
+# Нова версия сайта "Клиники здоровья"
+Стек использууемых технологий:
+* Nuxt 3
+* Vue 3
+* Nuxt/content
+* 
+## Установка
 
 Make sure to install dependencies:
 
