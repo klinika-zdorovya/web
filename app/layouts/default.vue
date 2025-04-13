@@ -1,9 +1,9 @@
 <template>
   <div class="container min-h-screen flex flex-col m-auto">
     <!-- Шапка для мобильной версии -->
-    <header class="bg-white shadow-md fixed w-full z-40 md:hidden">
-      <div class="container mx-auto px-4 h-16 flex items-center justify-between">
-        <NuxtLink class="text-xl font-bold text-blue-600 " to="/">
+    <header class="bg-brand-light shadow-md fixed w-full z-40 md:hidden">
+      <div class="container mx-auto px-4 h-16 flex items-center justify-between text-brand-ultra-light">
+        <NuxtLink class="text-xl font-bold  font-spb uppercase " to="/">
           Клиника Здоровья
         </NuxtLink>
         <button
@@ -54,7 +54,6 @@
                   <slot />
                 </div>
               </transition>
-
           </div>
         </div>
       </main>
