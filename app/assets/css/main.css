@@ -19,7 +19,7 @@ body {
 /* Headings */
 
 h1 {
-    @apply text-h1_sm leading-h1_sm mb-2 mt-1;
+    @apply text-h1_sm leading-h1_sm mb-2 mt-0 font-spb;
 }
 
 h2 {
