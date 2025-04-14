@@ -47,8 +47,8 @@
               :navigation="navigation"
               class="hidden md:flex bg-background-brand px-16 min-h-32 w-full"
           />
-
-          <div class="prose max-w-none mx-auto px-4 my-4 md:my-8 md:px-16 leading-7 min-h-[calc(100vh-278px)]">
+          <!-- блок контента -->
+          <div class="prose max-w-none mx-auto px-4 my-4 md:my-6 md:px-16 leading-7 min-h-[calc(100vh-278px)]">
               <transition mode="out-in" name="content-fade">
                 <div class="content-wrapper" :key="$route.path">
                   <slot />
