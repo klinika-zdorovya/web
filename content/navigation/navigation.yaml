@@ -4,7 +4,7 @@ body:
     path: /clinic/
     children:
       - title: О клинике
-        fullTitle: О клинике
+        fullTitle: Информация о клинике
         path: /clinic/about/
       - title: История создания
         fullTitle: История создания
