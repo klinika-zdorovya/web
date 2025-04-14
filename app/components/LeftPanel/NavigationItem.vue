@@ -4,12 +4,13 @@
       bg-background-block hover:bg-background-block-hover uppercase font-semibold"
       @mouseenter="desktopHover"
       @mouseleave="desktopLeave"
+      @click="desktopLeave"
   >
     <div class="flex items-center justify-between">
       <NuxtLink
           :to="item.path"
           :class="{'pl-8': level > 0 }"
-          class="block px-8 py-3 rounded-sm flex-1"
+          class="block px-8 py-3 rounded-sm flex-1 leading-tight"
           @click="mobileClick"
       >
         {{ item.title }}
@@ -49,6 +50,7 @@
             :key="child.path"
             :item="child"
             :level="level + 1"
+            @click="emitCloseMenu"
         />
       </ul>
     </transition>
@@ -68,6 +70,9 @@ import {ref, inject, watch} from 'vue';
 import {useRoute} from 'vue-router';
 
 const route = useRoute();
+
+const emit = defineEmits(['item-clicked']);
+
 const props = defineProps({
   item: Object,
   level: Number
@@ -83,17 +88,19 @@ const mobileClick = (event) => {
   if (props.item.children && isMobile.value) {
     event.preventDefault();
     toggleMobile();
+  } else if (!props.item.children) {
+    emitCloseMenu();
   }
+}
+
+const emitCloseMenu = () => {
+  emit('item-clicked');
 }
 
 const toggleMobile = () => {
   const newState = !isOpenMobile.value;
   setOpenItem(newState ? props.item.path : null);
 }
-
-watch(openItem, (newPath) => {
-  isOpenMobile.value = newPath === props.item.path;
-})
 
 const desktopHover = () => {
   if (!isMobile?.value && props.item.children) {
@@ -110,4 +117,8 @@ const desktopLeave = () => {
 const closeDesktop = () => {
   isOpenDesktop.value = false;
 }
+
+watch(openItem, (newPath) => {
+  isOpenMobile.value = newPath === props.item.path;
+})
 </script>

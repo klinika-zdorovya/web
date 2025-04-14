@@ -1,8 +1,7 @@
 <template>
   <div class="left-column hidden md:block bg-brand-light min-h-32 p-2 max-h-0">
     <NuxtLink class="text-h4_sm font-bold text-blue-600 block font-spb uppercase my-2 ml-16" to="/">
-      <div class="text-white">Клиника</div>
-      <div class="text-brand-ultra-light -mt-2">Здоровья</div>
+      <LogoMain />
     </NuxtLink>
     <div class="phone text-center text-white text-xs font-bold leading-tight">
       <div class="">Запись по телефону</div>
@@ -13,6 +12,7 @@
 
 <script setup lang="ts">
 
+import LogoMain from "~/components/LogoMain.vue";
 </script>
 
 <style scoped>

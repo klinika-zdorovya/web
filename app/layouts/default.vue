@@ -4,7 +4,7 @@
     <header class="bg-brand-light shadow-md fixed w-full z-40 md:hidden">
       <div class="container mx-auto px-4 h-16 flex items-center justify-between text-brand-ultra-light">
         <NuxtLink class="text-xl font-bold  font-spb uppercase " to="/">
-          Клиника Здоровья
+          <LogoMain />
         </NuxtLink>
         <button
             class="p-2 focus:outline-none md:hidden"
@@ -28,7 +28,7 @@
       >
         <div class="h-full min-h-[calc(100vh - 76px)] flex-col">
           <LeftPanelLogo />
-          <LeftPanelNavigation :navigation="navigation" />
+          <LeftPanelNavigation :navigation="navigation" @close-menu="closeMenu" />
         </div>
       </nav>
 
@@ -72,6 +72,8 @@
 
 <script setup>
 import {ref, provide} from 'vue';
+import Logo from "~/components/LogoMain.vue";
+import LogoMain from "~/components/LogoMain.vue";
 
 const isMenuOpen = ref(false);
 const isMobile = ref(false);
@@ -83,6 +85,8 @@ const setOpenItem = (path) => {
 const {data} = await useAsyncData('menu', () => {
   return queryCollection('menu').first();
 })
+
+const closeMenu = () => isMenuOpen.value = false;
 
 const navigation = data.value.body;
 

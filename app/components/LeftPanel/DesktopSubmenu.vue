@@ -13,6 +13,7 @@
             :to="child.path"
             class="block text-xs text-white
             uppercase font"
+            @click="close"
         >
           {{ child.title }}
         </NuxtLink>
