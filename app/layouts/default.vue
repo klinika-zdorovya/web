@@ -45,7 +45,7 @@
           <!-- Хлебные крошки -->
           <Breadcrumbs
               :navigation="navigation"
-              class="hidden md:flex bg-background-brand pl-4 min-h-32 w-full"
+              class="hidden md:flex bg-background-brand px-16 min-h-32 w-full"
           />
 
           <div class="prose max-w-none mx-auto px-4 my-8 md:px-16 leading-7 min-h-[calc(100vh-268px)]">
