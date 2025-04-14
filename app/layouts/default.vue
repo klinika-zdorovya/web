@@ -48,7 +48,7 @@
               class="hidden md:flex bg-background-brand px-16 min-h-32 w-full"
           />
 
-          <div class="prose max-w-none mx-auto px-4 my-8 md:px-16 leading-7 min-h-[calc(100vh-268px)]">
+          <div class="prose max-w-none mx-auto px-4 my-4 md:my-8 md:px-16 leading-7 min-h-[calc(100vh-278px)]">
               <transition mode="out-in" name="content-fade">
                 <div class="content-wrapper" :key="$route.path">
                   <slot />
@@ -59,21 +59,14 @@
       </main>
     </div>
 
-    <!-- Футер -->
-    <footer class="bg-background-brand-dark text-white mt-auto">
-      <div class="container mx-auto px-4 py-6">
-        <div class="text-center text-sm">
-          © 2011-{{ new Date().getFullYear() }} Клиника Здоровья. Все права защищены.
-        </div>
-      </div>
-    </footer>
+    <MainFooter />
   </div>
 </template>
 
 <script setup>
 import {ref, provide} from 'vue';
-import Logo from "~/components/LogoMain.vue";
 import LogoMain from "~/components/LogoMain.vue";
+import MainFooter from "~/components/MainFooter.vue";
 
 const isMenuOpen = ref(false);
 const isMobile = ref(false);
