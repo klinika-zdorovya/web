@@ -19,7 +19,7 @@ body {
 /* Headings */
 
 h1 {
-    @apply text-h1_sm leading-h1_sm mb-0 mt-0 font-spb;
+    @apply text-h1_sm leading-h1_sm mb-0 mt-0 font-spb uppercase;
 }
 
 h2 {
@@ -31,11 +31,11 @@ h3 {
 }
 
 h4 {
-    @apply text-h4_sm leading-h4_sm mb-2 mt-0;
+    @apply text-h4_sm leading-h4_sm mb-2 mt-0 font-thin;
 }
 
 h5 {
-    @apply text-h5_sm leading-h5_sm mb-1 mt-0;
+    @apply text-h5_sm leading-h5_sm mb-1 mt-0 font-thin;
 }
 
 @screen md {
