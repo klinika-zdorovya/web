@@ -59,6 +59,10 @@ body:
     fullTitle: Вопрос–ответ
     path: /questions/
 
+  - title: Отзывы
+    fullTitle: Отзывы о клинике
+    path: /reviews/
+
   - title: Контактная информация
     fullTitle: Контактная информация
     path: /contacts/
