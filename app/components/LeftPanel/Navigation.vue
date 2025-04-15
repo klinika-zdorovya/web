@@ -5,6 +5,7 @@
           v-for="link in navigation"
           :key="link.path"
           :item="link"
+          @item-clicked="clickOnItem"
           class="ml-0"
       />
     </ul>
@@ -18,6 +19,12 @@ const {navigation} = defineProps({
     default: [],
   }
 })
+
+const emit = defineEmits(['close-menu']);
+
+const clickOnItem = () => {
+  emit('close-menu');
+}
 
 </script>
 

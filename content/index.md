@@ -1,24 +1,28 @@
-# Welcome to Nuxt Content Starter
+## Основная типографика для сайта:
 
-This is the main page displaying Markdown located at [content/index.md](https://github.com/larbish/starter/blob/content/content/index.md).
+# Заголовок #1: Основной заголовок страницы
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+## Заголовок #2: Заголовок раздела
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+### Заголовок #3: Подзаголовок раздела
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+#### Заголовок #4: Вложенный подзаголовок
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+##### Заголовок #5: Вложенный подзаголовок раздела 2 типа
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
 
-Move to [about](/about) page.
-
-## Manage your Contents
-
-Create new pages or modify the existing ones in `content/` directory.
-
-## Query & Render Pages
-
-You can find an example of querying contents and rendering them in a [catch-all page](https://github.com/larbish/starter/blob/content/app/pages/%5B...slug%5D.vue)
-
-## Integrate Vue Component
-
-::alert{color="green"}
-The current [alert](https://github.com/larbish/starter/blob/content/app/components/Alert.vue) and the [counter](https://github.com/larbish/starter/blob/content/app/components/Counter.vue) below are `Vue` components integrated into the Markdown.
-::
-
-::counter
-::
-
-Checkout out the [documentation](https://content.nuxt.com/docs/getting-started) to learn more.
+## Списки:
+* пункт списка #1
+* пункт списка #2 с ссылками
+* * [ссылка #2.1](/)
+* * [ссылка #2.2](/)
+* пункт списка #3
+* * пункт списка #3.1
+* * пункт списка #3.2
+* * пункт списка #3.3
+* пункт списка #4
+* * пункт списка #4.1
+* * пункт списка #4.2
+* * * пункт списка #4.2.1
+* * * пункт списка #4.2.2
+* * пункт списка #5

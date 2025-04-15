@@ -4,7 +4,7 @@
     <header class="bg-brand-light shadow-md fixed w-full z-40 md:hidden">
       <div class="container mx-auto px-4 h-16 flex items-center justify-between text-brand-ultra-light">
         <NuxtLink class="text-xl font-bold  font-spb uppercase " to="/">
-          Клиника Здоровья
+          <LogoMain />
         </NuxtLink>
         <button
             class="p-2 focus:outline-none md:hidden"
@@ -28,7 +28,8 @@
       >
         <div class="h-full min-h-[calc(100vh - 76px)] flex-col">
           <LeftPanelLogo />
-          <LeftPanelNavigation :navigation="navigation" />
+          <LeftPanelNavigation :navigation="navigation" @close-menu="closeMenu" />
+          <SkeletonDoctor view="brief" />
         </div>
       </nav>
 
@@ -45,10 +46,10 @@
           <!-- Хлебные крошки -->
           <Breadcrumbs
               :navigation="navigation"
-              class="hidden md:flex bg-background-brand pl-4 min-h-32 w-full"
+              class="hidden md:flex bg-background-brand px-16 min-h-32 w-full"
           />
-
-          <div class="prose max-w-none mx-auto px-4 my-8 md:px-16 leading-7 min-h-[calc(100vh-268px)]">
+          <!-- блок контента -->
+          <div class="prose max-w-none mx-auto px-4 my-4 md:my-6 md:px-16 leading-7 min-h-[calc(100vh-278px)]">
               <transition mode="out-in" name="content-fade">
                 <div class="content-wrapper" :key="$route.path">
                   <slot />
@@ -59,19 +60,14 @@
       </main>
     </div>
 
-    <!-- Футер -->
-    <footer class="bg-background-brand-dark text-white mt-auto">
-      <div class="container mx-auto px-4 py-6">
-        <div class="text-center text-sm">
-          © 2011-{{ new Date().getFullYear() }} Клиника Здоровья. Все права защищены.
-        </div>
-      </div>
-    </footer>
+    <MainFooter />
   </div>
 </template>
 
 <script setup>
 import {ref, provide} from 'vue';
+import LogoMain from "~/components/LogoMain.vue";
+import MainFooter from "~/components/MainFooter.vue";
 
 const isMenuOpen = ref(false);
 const isMobile = ref(false);
@@ -83,6 +79,8 @@ const setOpenItem = (path) => {
 const {data} = await useAsyncData('menu', () => {
   return queryCollection('menu').first();
 })
+
+const closeMenu = () => isMenuOpen.value = false;
 
 const navigation = data.value.body;
 
