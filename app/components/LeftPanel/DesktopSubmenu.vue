@@ -7,7 +7,8 @@
     <ul class="w-[350px]">
       <li v-for="child in children"
           :key="child.path"
-          class="my-0 py-2 px-8 border-b border-divider-green bg-background-brand-green hover:bg-background-brand-green-hover"
+          class="my-0 py-2 px-8 border-b leading-5
+          border-divider-green bg-background-brand-green hover:bg-background-brand-green-hover"
       >
         <NuxtLink
             :to="child.path"

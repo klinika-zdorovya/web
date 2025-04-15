@@ -1,14 +1,11 @@
-::UserSkeleton
+::SkeletonDoctor
 ::
 
-::UserSkeleton
+::SkeletonDoctor
 ::
 
-::UserSkeleton
+::SkeletonDoctor
 ::
 
-::UserSkeleton
-::
-
-::UserSkeleton
+::SkeletonDoctor
 ::

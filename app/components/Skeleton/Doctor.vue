@@ -1,5 +1,5 @@
 <template>
-  <div class="border-b my-4">
+  <div :class="{'border-b': view==='extended'}" class="my-4">
     <!-- Extended View -->
     <div v-if="view === 'extended'" class="flex gap-4 p-4 animate-pulse">
       <div class="min-w-[96px]">

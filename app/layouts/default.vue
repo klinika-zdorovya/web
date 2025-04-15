@@ -29,7 +29,7 @@
         <div class="h-full min-h-[calc(100vh - 76px)] flex-col">
           <LeftPanelLogo />
           <LeftPanelNavigation :navigation="navigation" @close-menu="closeMenu" />
-          <UserSkeleton view="brief" />
+          <SkeletonDoctor view="brief" />
         </div>
       </nav>
 
