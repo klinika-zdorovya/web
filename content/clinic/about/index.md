@@ -13,3 +13,6 @@ url: /clinic/doctors
 text: ведущие врачи клиники
 ---
 ::
+
+::SkeletonMotivateWhyWe
+::
