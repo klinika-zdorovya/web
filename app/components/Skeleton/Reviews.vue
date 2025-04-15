@@ -27,21 +27,7 @@
     </div>
   </div>
 </template>
-
-<script setup>
-// Логика компонента
-</script>
-
 <style>
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1 }
-  50% { opacity: 0.5 }
-}
-
 /* Адаптивность */
 @media (max-width: 640px) {
   .sm\:flex-row {
