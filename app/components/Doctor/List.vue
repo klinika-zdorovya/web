@@ -6,6 +6,7 @@
         :doctor="doctor"
         :view="view"
         :class="{ 'border-b-0': index === doctors.length - 1 }"
+        class="mt-4"
     />
   </div>
 </template>
@@ -20,7 +21,6 @@ const props = defineProps({
 
 const { data: doctors } = await useAsyncData('doctors', () => {
   return queryCollection('doctors')
-      .order('name', 'ASC')
       .all()
 })
 </script>

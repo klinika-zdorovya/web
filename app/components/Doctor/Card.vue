@@ -1,12 +1,16 @@
 <template>
   <div
       :class="[
-      'transition-colors duration-300',
-      { 'bg-background-block': isOpen, 'bg-background-content': !isOpen },
-      view === 'extended' ? 'border-b border-[#e0e8e9]' : ''
+      'transition-all duration-300 transform',
+      {
+        'bg-background-block shadow-2xl': isOpen,
+        'bg-background-content': !isOpen
+      },
+
     ]"
       @click="toggleDescription"
   >
+
     <!-- Extended View -->
     <div v-if="view === 'extended'" class="flex flex-col md:flex-row gap-4 md:gap-6 p-4 md:p-6 cursor-pointer">
       <!-- Аватар -->
@@ -32,35 +36,24 @@
         <!-- Десктопные заголовки -->
         <DoctorInfo :doctor="doctor" class="hidden md:block leading-3"/>
 
-        <!-- Мобильное описание -->
-        <transition
-            name="description"
-            enter-active-class="transition-all duration-300 ease-out"
-            leave-active-class="transition-all duration-200 ease-in"
-            enter-from-class="opacity-0 max-h-0"
-            enter-to-class="opacity-100 max-h-max"
-            leave-from-class="opacity-100 max-h-max"
-            leave-to-class="opacity-0 max-h-0"
-        >
-          <div v-if="isOpen" class="md:hidden mt-4">
-            <p class="text-gray-600 whitespace-pre-wrap">{{ doctor.description }}</p>
-          </div>
-        </transition>
+        <!-- Контент -->
+        <div class="flex-1">
+          <!-- Заголовки (без изменений) -->
 
-        <!-- Десктопное описание -->
-        <transition
-            enter-active-class="transition-all duration-300 ease-out"
-            enter-from-class="opacity-0 max-h-0"
-            enter-to-class="opacity-100 max-h-max"
-            leave-active-class="transition-all duration-200 ease-in"
-            leave-from-class="opacity-100 max-h-max"
-            leave-to-class="opacity-0 max-h-0"
-            name="description"
-        >
-          <div v-if="isOpen" class="hidden md:block mt-4">
-            <p class="text-gray-600 whitespace-pre-wrap">{{ doctor.description }}</p>
-          </div>
-        </transition>
+          <!-- Анимация для описания -->
+          <transition
+              name="slide"
+              @enter="enter"
+              @leave="leave"
+              @after-enter="afterEnter"
+          >
+            <div v-if="isOpen" class="overflow-hidden">
+              <div ref="content">
+                <p class="text-gray-600 text-justify mt-4 leading-5 md:pr-12" v-html="formattedDescription"></p>
+              </div>
+            </div>
+          </transition>
+        </div>
       </div>
     </div>
 
@@ -87,23 +80,66 @@
 </template>
 
 <script setup>
+import {ref} from 'vue';
+
 const props = defineProps({
-  doctor: {
-    type: Object,
-    required: true
-  },
-  view: {
-    type: String,
-    default: 'extended',
-    validator: (v) => ['extended', 'short', 'avatar'].includes(v)
-  }
+  doctor: Object,
+  view: String,
 })
 
-const isOpen = ref(false)
+const isOpen = ref(false);
+const content = ref(null);
 
 const toggleDescription = () => {
   if (props.view === 'extended') {
-    isOpen.value = !isOpen.value
+    isOpen.value = !isOpen.value;
   }
 }
+
+const formattedDescription = computed(() => {
+  return props.doctor.description
+      .replace(/\\n/g, '<br><br>')
+      .replace(/  /g, '&nbsp;&nbsp;');
+})
+
+// Анимационные хуки
+const enter = (el) => {
+  el.style.height = '0';
+  requestAnimationFrame(() => {
+    el.style.transition = 'height 0.3s ease-out';
+    el.style.height = `${content.value.offsetHeight}px`;
+  })
+}
+
+const afterEnter = (el) => {
+  el.style.height = 'auto';
+}
+
+const leave = (el) => {
+  el.style.height = `${el.offsetHeight}px`;
+
+  requestAnimationFrame(() => {
+    el.style.transition = 'height 0.2s ease-in';
+    el.style.height = '0';
+  });
+}
 </script>
+
+<style>
+.slide-enter-active,
+.slide-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.slide-enter-to,
+.slide-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
