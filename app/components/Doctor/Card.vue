@@ -8,28 +8,56 @@
       @click="toggleDescription"
   >
     <!-- Extended View -->
-    <div v-if="view === 'extended'" class="flex gap-6 p-6 cursor-pointer">
+    <div v-if="view === 'extended'" class="flex flex-col md:flex-row gap-4 md:gap-6 p-4 md:p-6 cursor-pointer">
+      <!-- Аватар -->
+      <div class="md:hidden flex justify-center">
+        <img
+            :alt="doctor.name"
+            :src="doctor.avatar"
+            class="w-24 h-24 md:w-44 md:h-44 rounded-full object-cover"
+        >
+      </div>
+
+      <DoctorInfo :doctor="doctor" class="md:hidden text-center"/>
+
+      <!-- Десктопный аватар -->
       <img
-          :src="doctor.avatar"
           :alt="doctor.name"
-          class="w-32 h-32 md:w-44 md:h-44 rounded-full object-cover shrink-0"
+          :src="doctor.avatar"
+          class="hidden md:block w-32 h-32 md:w-44 md:h-44 rounded-full object-cover shrink-0"
       >
 
+      <!-- Контент -->
       <div class="flex-1">
-        <h2 class="text-brand-light uppercase mb-2">{{ doctor.name }}</h2>
-        <h3 class="text-brand-light mb-4">{{ doctor.positionFirst }}</h3>
+        <!-- Десктопные заголовки -->
+        <DoctorInfo :doctor="doctor" class="hidden md:block leading-3"/>
 
+        <!-- Мобильное описание -->
         <transition
             name="description"
             enter-active-class="transition-all duration-300 ease-out"
             leave-active-class="transition-all duration-200 ease-in"
             enter-from-class="opacity-0 max-h-0"
-            enter-to-class="opacity-100 max-h-[500px]"
-            leave-from-class="opacity-100 max-h-[500px]"
+            enter-to-class="opacity-100 max-h-max"
+            leave-from-class="opacity-100 max-h-max"
             leave-to-class="opacity-0 max-h-0"
         >
-          <div v-if="isOpen" class="overflow-hidden">
-            <h3 class="font-semibold mb-2">{{ doctor.descriptionTitle }}</h3>
+          <div v-if="isOpen" class="md:hidden mt-4">
+            <p class="text-gray-600 whitespace-pre-wrap">{{ doctor.description }}</p>
+          </div>
+        </transition>
+
+        <!-- Десктопное описание -->
+        <transition
+            enter-active-class="transition-all duration-300 ease-out"
+            enter-from-class="opacity-0 max-h-0"
+            enter-to-class="opacity-100 max-h-max"
+            leave-active-class="transition-all duration-200 ease-in"
+            leave-from-class="opacity-100 max-h-max"
+            leave-to-class="opacity-0 max-h-0"
+            name="description"
+        >
+          <div v-if="isOpen" class="hidden md:block mt-4">
             <p class="text-gray-600 whitespace-pre-wrap">{{ doctor.description }}</p>
           </div>
         </transition>
