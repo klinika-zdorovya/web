@@ -12,9 +12,9 @@
   >
 
     <!-- Extended View -->
-    <div v-if="view === 'extended'" class="flex flex-col md:flex-row gap-4 md:gap-6 p-4 md:p-6 cursor-pointer">
+    <div v-if="view === 'extended'" class="flex flex-col lg:flex-row gap-4 lg:gap-6 p-4 lg:p-6 cursor-pointer">
       <!-- Аватар -->
-      <div class="md:hidden flex justify-center">
+      <div class="lg:hidden flex flex-col items-center">
         <img
             :alt="doctor.name"
             :src="doctor.avatar"
@@ -28,13 +28,13 @@
       <img
           :alt="doctor.name"
           :src="doctor.avatar"
-          class="hidden md:block w-32 h-32 md:w-44 md:h-44 rounded-full object-cover shrink-0"
+          class="hidden lg:block w-44 h-44 rounded-full object-cover shrink-0"
       >
 
       <!-- Контент -->
       <div class="flex-1">
         <!-- Десктопные заголовки -->
-        <DoctorInfo :doctor="doctor" class="hidden md:block leading-3"/>
+        <DoctorInfo :doctor="doctor" class="hidden lg:block md:block leading-3"/>
 
         <!-- Контент -->
         <div class="flex-1">
