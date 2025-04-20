@@ -71,3 +71,9 @@ p {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
 }
+
+br {
+    content: '';
+    display: block;
+    margin-bottom: 0.5rem;
+}

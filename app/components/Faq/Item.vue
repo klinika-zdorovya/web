@@ -18,20 +18,16 @@
               class="justify-start"
           />
         </div>
-        <p class="mt-4 text-background-brand-green text-sm leading-5 font-semibold" v-html="faq.answer" />
+        <p class="mt-4 text-background-brand-green text-sm leading-5 font-semibold" v-html="format.nl2br(faq.answer)" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useBreakpoints } from '@vueuse/core'
+import {useFormatText} from "~/composable/nl2br.js";
 
-const breakpoints = useBreakpoints({
-  desktop: 1024,
-})
-
-const isMobile = breakpoints.smaller('desktop')
+const format = useFormatText();
 
 defineProps({
   faq: {

@@ -43,7 +43,7 @@
           >
             <div v-if="isOpen" class="overflow-hidden">
               <div ref="content">
-                <p class="text-gray-600 text-justify mt-4 leading-5 md:pr-12" v-html="formattedDescription"></p>
+                <p class="text-gray-600 text-justify mt-4 leading-5 md:pr-12" v-html="format.nl2br(doctorData.description)"></p>
               </div>
             </div>
           </transition>
@@ -77,7 +77,7 @@
 
 <script setup>
 import {ref, computed, watchEffect, onMounted} from 'vue';
-import Avatar from "~/components/Doctor/Avatar.vue";
+import {useFormatText} from "~/composable/nl2br.js";
 
 const props = defineProps({
   doctor: {
@@ -99,6 +99,7 @@ const content = ref(null);
 const doctorData = ref(null);
 const loading = ref(false);
 const error = ref(null);
+const format = useFormatText();
 
 const fetchDoctor = async (doctorName) => {
   const queryString = `%${doctorName}%`;
@@ -147,12 +148,6 @@ const toggleDescription = () => {
     isOpen.value = !isOpen.value;
   }
 }
-
-const formattedDescription = computed(() => {
-  return doctorData.value.description
-      .replace(/\\n|\n/g, '<br><br>') // Обрабатывает и `\n`, и символы новой строки
-      .replace(/  /g, '&nbsp;&nbsp;'); // Заменяет двойные пробелы
-});
 
 // Анимационные хуки
 const enter = (el) => {
