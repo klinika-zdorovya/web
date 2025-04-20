@@ -3,8 +3,9 @@
       :class="[
       'transition-all duration-300 transform',
       {
-        'bg-background-block shadow-2xl': isOpen,
-        'bg-background-content': !isOpen
+        'bg-background-block': isOpen,
+        'shadow-2xl': isOpen && view === 'extended',
+        'bg-background-content': !isOpen && view === 'extended'
       },
 
     ]"
@@ -65,7 +66,7 @@
             :src="doctorData?.avatar"
             class="w-24 h-24 rounded-full object-cover mx-auto mb-4"
         >
-        <p class="text-sm text-gray-600 leading-5">{{ doctorData?.positionSecond }}</p>
+        <p class="text-xs text-brand-light leading-5 font-semibold">{{ doctorData?.positionSecond }}</p>
       </NuxtLink>
     </div>
 
