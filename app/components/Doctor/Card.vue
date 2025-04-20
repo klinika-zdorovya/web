@@ -116,7 +116,7 @@ const fetchDoctor = async (doctorName) => {
               .first()
         }
     )
-    console.log(data)
+
     if (data.value) {
       doctorData.value = data.value;
     } else {
@@ -137,7 +137,6 @@ watchEffect(async () => {
     doctorData.value = props.doctor;
   } else if (props.name) {
     // Если передано имя для поиска
-    console.log('NAME:', props.name);
     await fetchDoctor(props.name);
   }
 });
@@ -157,9 +156,9 @@ const toggleDescription = () => {
 
 const formattedDescription = computed(() => {
   return doctorData.value.description
-      .replace(/\\n/g, '<br><br>')
-      .replace(/  /g, '&nbsp;&nbsp;');
-})
+      .replace(/\\n|\n/g, '<br><br>') // Обрабатывает и `\n`, и символы новой строки
+      .replace(/  /g, '&nbsp;&nbsp;'); // Заменяет двойные пробелы
+});
 
 // Анимационные хуки
 const enter = (el) => {
