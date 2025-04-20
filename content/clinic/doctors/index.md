@@ -1,11 +1,2 @@
-::SkeletonDoctor
-::
-
-::SkeletonDoctor
-::
-
-::SkeletonDoctor
-::
-
-::SkeletonDoctor
+::DoctorsList
 ::

@@ -35,6 +35,7 @@ export default {
 
 
 
+
                 'color-typography': '#434343',
 
             },
