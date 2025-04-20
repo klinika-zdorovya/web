@@ -29,8 +29,7 @@
         <div class="h-full min-h-[calc(100vh - 76px)] flex-col">
           <LeftPanelLogo />
           <LeftPanelNavigation :navigation="navigation" @close-menu="closeMenu" />
-          <SkeletonDoctor view="brief" />
-          <DoctorCard :doctor
+          <DoctorCard name="Родичкин" view="short" />
         </div>
       </nav>
 

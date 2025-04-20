@@ -16,25 +16,25 @@
       <!-- Аватар -->
       <div class="lg:hidden flex flex-col items-center">
         <img
-            :alt="doctor.name"
-            :src="doctor.avatar"
+            :alt="doctorData.name"
+            :src="doctorData.avatar"
             class="w-24 h-24 md:w-44 md:h-44 rounded-full object-cover"
         >
       </div>
 
-      <DoctorInfo :doctor="doctor" class="md:hidden text-center"/>
+      <DoctorInfo :doctor="doctorData" class="md:hidden text-center"/>
 
       <!-- Десктопный аватар -->
       <img
-          :alt="doctor.name"
-          :src="doctor.avatar"
+          :alt="doctorData.name"
+          :src="doctorData.avatar"
           class="hidden lg:block w-44 h-44 rounded-full object-cover shrink-0"
       >
 
       <!-- Контент -->
       <div class="flex-1">
         <!-- Десктопные заголовки -->
-        <DoctorInfo :doctor="doctor" class="hidden lg:block md:block leading-3"/>
+        <DoctorInfo :doctor="doctorData" class="hidden lg:block md:block leading-3"/>
 
         <!-- Контент -->
         <div class="flex-1">
@@ -58,37 +58,95 @@
     </div>
 
     <!-- Short View -->
-    <div v-else-if="view === 'short'" class="p-4 text-center">
-      <img
-          :src="doctor.avatar"
-          :alt="doctor.name"
-          class="w-24 h-24 rounded-full object-cover mx-auto mb-4"
-      >
-      <p class="text-sm text-gray-600">{{ doctor.positionSecond }}</p>
+    <div v-else-if="view === 'short' && doctorData" class="p-4 text-center">
+      <NuxtLink to="/clinic/doctors">
+        <img
+            :alt="doctorData?.name"
+            :src="doctorData?.avatar"
+            class="w-24 h-24 rounded-full object-cover mx-auto mb-4"
+        >
+        <p class="text-sm text-gray-600 leading-5">{{ doctorData?.positionSecond }}</p>
+      </NuxtLink>
     </div>
 
     <!-- Avatar View -->
     <div v-else-if="view === 'avatar'" class="flex items-center p-4 gap-4">
       <img
-          :src="doctor.avatar"
-          :alt="doctor.name"
+          :alt="doctorData.name"
+          :src="doctorData.avatar"
           class="w-10 h-10 rounded-full object-cover"
       >
-      <span class="font-medium">{{ doctor.name }}</span>
+      <span class="font-medium">{{ doctorData?.name }}</span>
     </div>
   </div>
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import {ref, computed, watchEffect, onMounted} from 'vue';
 
 const props = defineProps({
-  doctor: Object,
-  view: String,
+  doctor: {
+    type: Object,
+    default: null
+  },
+  name: {
+    type: String,
+    default: ''
+  },
+  view: {
+    type: String,
+    default: 'extended'
+  }
 })
 
 const isOpen = ref(false);
 const content = ref(null);
+const doctorData = ref(null);
+const loading = ref(false);
+const error = ref(null);
+
+const fetchDoctor = async (doctorName) => {
+  const queryString = `%${doctorName}%`;
+  try {
+    loading.value = true;
+    const {data} = await useAsyncData('doctorsSingle', () => {
+          return queryCollection('doctors')
+              .where('name', 'LIKE', queryString)
+              .first()
+        }
+    )
+    console.log(data)
+    if (data.value) {
+      doctorData.value = data.value;
+    } else {
+      error.value = 'Врач не найден';
+    }
+  } catch (e) {
+    error.value = e.message;
+    console.error('Ошибка загрузки врача:', e);
+  } finally {
+    loading.value = false;
+  }
+};
+
+// Реактивное обновление данных
+watchEffect(async () => {
+  if (props.doctor) {
+    // Если передан готовый объект врача
+    doctorData.value = props.doctor;
+  } else if (props.name) {
+    // Если передано имя для поиска
+    console.log('NAME:', props.name);
+    await fetchDoctor(props.name);
+  }
+});
+
+// Обработка первичной загрузки
+onMounted(async () => {
+  if (!props.doctor && props.name) {
+    await fetchDoctor(props.name);
+  }
+});
 
 const toggleDescription = () => {
   if (props.view === 'extended') {
@@ -97,7 +155,7 @@ const toggleDescription = () => {
 }
 
 const formattedDescription = computed(() => {
-  return props.doctor.description
+  return doctorData.value.description
       .replace(/\\n/g, '<br><br>')
       .replace(/  /g, '&nbsp;&nbsp;');
 })

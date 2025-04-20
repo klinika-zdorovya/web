@@ -1,5 +1,5 @@
 <template>
-  <div class="divide-y divide-[#e0e8e9]">
+  <div class="divide-y divide-divider">
     <DoctorCard
         v-for="(doctor, index) in doctors"
         :key="doctor._id"
@@ -20,7 +20,6 @@ const props = defineProps({
 
 const { data: doctors } = await useAsyncData('doctors', () => {
   return queryCollection('doctors')
-      .order('name', 'ASC')
       .all()
 })
 </script>
