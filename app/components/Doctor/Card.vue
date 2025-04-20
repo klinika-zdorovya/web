@@ -16,21 +16,14 @@
     <div v-if="view === 'extended'" class="flex flex-col lg:flex-row gap-4 lg:gap-6 p-4 lg:p-6 cursor-pointer">
       <!-- Аватар -->
       <div class="lg:hidden flex flex-col items-center">
-        <img
-            :alt="doctorData.name"
-            :src="doctorData.avatar"
-            class="w-24 h-24 md:w-44 md:h-44 rounded-full object-cover"
-        >
+        <DoctorAvatar :doctor="doctorData" />
       </div>
 
       <DoctorInfo :doctor="doctorData" class="md:hidden text-center"/>
 
       <!-- Десктопный аватар -->
-      <img
-          :alt="doctorData.name"
-          :src="doctorData.avatar"
-          class="hidden lg:block w-44 h-44 rounded-full object-cover shrink-0"
-      >
+
+      <DoctorAvatar :doctor="doctorData" class="hidden lg:block" />
 
       <!-- Контент -->
       <div class="flex-1">
@@ -71,10 +64,10 @@
     </div>
 
     <!-- Avatar View -->
-    <div v-else-if="view === 'avatar'" class="flex items-center p-4 gap-4">
+    <div v-else-if="view === 'avatar'" class="flex items-center gap-4 leading-5 ">
       <img
-          :alt="doctorData.name"
-          :src="doctorData.avatar"
+          :alt="doctorData?.name"
+          :src="doctorData?.avatar"
           class="w-10 h-10 rounded-full object-cover"
       >
       <span class="font-medium">{{ doctorData?.name }}</span>
@@ -84,6 +77,7 @@
 
 <script setup>
 import {ref, computed, watchEffect, onMounted} from 'vue';
+import Avatar from "~/components/Doctor/Avatar.vue";
 
 const props = defineProps({
   doctor: {
@@ -110,7 +104,7 @@ const fetchDoctor = async (doctorName) => {
   const queryString = `%${doctorName}%`;
   try {
     loading.value = true;
-    const {data} = await useAsyncData('doctorsSingle', () => {
+    const {data} = await useAsyncData(`doctorsSingle-${doctorName}`, () => {
           return queryCollection('doctors')
               .where('name', 'LIKE', queryString)
               .first()

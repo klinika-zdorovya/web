@@ -1,2 +1,2 @@
-::SkeletonQuestions
+::FaqList
 ::
