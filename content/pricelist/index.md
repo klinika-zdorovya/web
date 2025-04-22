@@ -1,2 +1,2 @@
-::SkeletonPricelist
+::PriceList
 ::

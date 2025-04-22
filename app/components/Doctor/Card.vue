@@ -59,7 +59,7 @@
             :src="doctorData?.avatar"
             class="w-24 h-24 rounded-full object-cover mx-auto mb-4"
         >
-        <p class="text-xs text-brand-light leading-5 font-semibold">{{ doctorData?.positionSecond }}</p>
+        <p class="text-xs text-brand-light leading-4 font-semibold">{{ doctorData?.positionSecond }}</p>
       </NuxtLink>
     </div>
 
@@ -70,13 +70,13 @@
           :src="doctorData?.avatar"
           class="w-10 h-10 rounded-full object-cover"
       >
-      <span class="font-medium">{{ doctorData?.name }}</span>
+      <span class="font-medium italic font-spb max-w-40">{{ doctorData?.name }}</span>
     </div>
   </div>
 </template>
 
 <script setup>
-import {ref, computed, watchEffect, onMounted} from 'vue';
+import {ref, watchEffect, onMounted} from 'vue';
 import {useFormatText} from "~/composable/nl2br.js";
 
 const props = defineProps({

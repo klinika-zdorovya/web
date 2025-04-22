@@ -35,6 +35,10 @@ export default defineContentConfig({
                 answer: z.string(),
                 doctorName: z.string(),
             })
-        })
+        }),
+        pricelist: defineCollection({
+            type: 'page',
+            source: 'data/pricelist/pricelist.yaml',
+        }),
     }
 });
