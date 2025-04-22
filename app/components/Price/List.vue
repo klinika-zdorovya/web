@@ -2,8 +2,11 @@
   <div>
     <!-- Секции -->
     <div v-for="section in pricelist.body" :key="section.title" class="mb-8">
-      <!-- Заголовок секции -->
-      <h2 class="text-lg font-semibold mb-4">{{ section.title }}</h2>
+      <!-- Заголовок секции с правым столбцом -->
+      <div class="grid grid-cols-[1fr_142px] items-center px-4 border-b-[3px] border-brand-light mb-4 pb-2">
+        <h2 class="text-lg font-semibold text-brand-light">{{ section.title }}</h2>
+        <div class="text-right font-medium text-brand-light">Стоимость, руб.</div>
+      </div>
 
       <!-- Таблица -->
       <div class="rounded-lg overflow-hidden border border-gray-100">
@@ -11,7 +14,7 @@
             v-for="(service, index) in section.services"
             :key="service.name"
             class="grid grid-cols-[1fr_142px] items-center px-4 py-3"
-            :class="index % 2 === 0 ? 'bg-[#EFF4F4]' : 'bg-white'"
+            :class="index % 2 === 0 ? 'bg-background-block' : 'bg-background-content'"
         >
           <!-- Название услуги -->
           <span class="text-gray-900">{{ service.name }}</span>
@@ -22,7 +25,7 @@
               {{ formatPrice(service.minPrice) }}
             </template>
             <template v-else>
-              {{ formatPrice(service.minPrice) }}–{{ formatPrice(service.maxPrice) }}
+              {{ formatPrice(service.minPrice) }} – {{ formatPrice(service.maxPrice) }}
             </template>
           </div>
         </div>
