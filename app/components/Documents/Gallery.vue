@@ -20,20 +20,19 @@
     <div
         v-if="isOpen"
         class="fixed inset-0 flex items-center justify-center z-30"
-        @click.self="closeModal"
     >
       <!-- Overlay -->
-      <div class="absolute inset-0 bg-black/50 backdrop-blur-sm "></div>
+      <div class="absolute inset-0 bg-black/50 backdrop-blur-sm " @click.self="closeModal"></div>
 
       <!-- Main Modal Content -->
       <div class="relative">
         <!-- Close Button -->
-        <button
-            class="absolute top-5 right-5 text-background-brand-dark text-3xl ч hover:opacity-75 transition-opacity z-[50]"
-            @click="closeModal"
-        >
-          &times;
-        </button>
+          <RoundButton
+              class="absolute top-5 right-5 text-background-brand-dark text-3xl z-[50]"
+              @click="closeModal"
+          >
+            &times;
+          </RoundButton>
 
         <!-- Image Container -->
         <div class="relative ">
@@ -44,9 +43,7 @@
                 class="h-full w-1/2 flex items-center pl-2 pr-10 pointer-events-auto cursor-pointer"
                 @click.stop="prevImage"
             >
-              <button class="p-2 text-white text-4xl opacity-70 hover:opacity-100 transition-opacity">
-                &larr;
-              </button>
+              <RoundButton>&larr;</RoundButton>
             </div>
 
             <!-- Right Arrow Zone -->
@@ -54,9 +51,7 @@
                 class="h-full w-1/2 flex items-center justify-end pr-2 pl-10 pointer-events-auto cursor-pointer"
                 @click.stop="nextImage"
             >
-              <button class="p-2 text-white text-4xl opacity-70 hover:opacity-100 transition-opacity">
-                &rarr;
-              </button>
+              <RoundButton >&rarr;</RoundButton>
             </div>
           </div>
 
@@ -64,12 +59,12 @@
           <Transition :name="transitionDirection" mode="out-in">
             <div
                 :key="currentIndex"
-                class="relative bg-white rounded-lg overflow-hidden shadow-2xl z-0"
+                class="relative bg-white rounded-lg overflow-hidden shadow-2xl"
             >
               <img
                   :src="currentImage.url"
                   :alt="currentImage.title"
-                  class="max-h-[90vh] object-contain mx-auto"
+                  class="max-h-[95vh] object-contain mx-auto"
               />
             </div>
           </Transition>
@@ -80,7 +75,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+import RoundButton from "~/components/RoundButton.vue";
+
 
 const props = defineProps({
   imagesList: {
