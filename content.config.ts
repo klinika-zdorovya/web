@@ -40,5 +40,13 @@ export default defineContentConfig({
             type: 'page',
             source: 'data/pricelist/pricelist.yaml',
         }),
+        documents: defineCollection({
+            type: 'data',
+            source: 'data/documents/documents.yaml',
+            schema: z.object({
+                title: z.string(),
+                url: z.string(),
+            }),
+        }),
     }
 });
