@@ -46,8 +46,6 @@ const { data: pricelist } = await useAsyncData('pricelist', () => {
   return queryCollection('pricelist').first()
 })
 
-console.log('pricelist', pricelist )
-
 // Форматирование цены
 const formatPrice = (price) => {
   return new Intl.NumberFormat('ru-RU').format(price) + ' ₽'

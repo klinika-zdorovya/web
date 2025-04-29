@@ -1,7 +1,7 @@
 <template>
   <!-- Футер -->
   <footer class="bg-background-brand-dark text-white mt-auto relative">
-    <div class="switcher hidden md:block absolute bg-blue-500 w-6 h-6 right-4 top-6">
+    <div class="switcher hidden md:block absolute  w-6 h-6 right-4 top-6">
       <ThemeSwitcher />
     </div>
     <div class="container mx-auto px-4 py-4">
