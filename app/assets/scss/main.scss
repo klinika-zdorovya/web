@@ -65,6 +65,20 @@ p {
 
 }
 
+.dark {
+  .prose {
+    ul {
+      li::before {
+        color: #5EC8B8;
+      }
+
+      a {
+        color: #5EC8B8,
+      }
+    }
+  }
+}
+
 .prose {
   /* Для всех уровней вложенности списков */
   ul {

@@ -18,7 +18,7 @@
     </header>
 
     <!-- Основной контент и меню -->
-    <div class="flex mt-16 md:mt-0">
+    <div class="flex mt-16 md:mt-0 relative">
       <!-- Боковое меню -->
       <nav
           :class="{ 'translate-x-0': isMenuOpen }"
@@ -41,7 +41,8 @@
       ></div>
 
       <!-- Основное содержимое -->
-      <main class="flex-1 bg-background-content">
+      <main class="flex-1 bg-background-content dark:bg-background-content__dark">
+
         <div class="container">
           <!-- Хлебные крошки -->
           <Breadcrumbs

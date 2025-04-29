@@ -1,5 +1,5 @@
 <template>
-  <div class="font-semibold uppercase text-color-typography text-xs md:text-sm leading-5">
+  <div class="font-semibold uppercase text-color-typography dark:text-color-typography__dark text-xs md:text-sm leading-5">
     {{ formattedDate }} • {{ formattedName }}
   </div>
 </template>

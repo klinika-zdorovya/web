@@ -4,7 +4,7 @@
     <div class="w-full lg:w-auto lg:mb-0 mx-auto lg:mx-0">
       <div class="w-full inline-block md:mt-5">
         <DateName :date="faq.date" :name="faq.name" />
-        <p class="mt-2 text-color-typography text-sm leading-5">{{ faq.question }}</p>
+        <p class="mt-2 text-color-typography dark:text-color-typography__dark text-sm leading-5">{{ faq.question }}</p>
       </div>
     </div>
 

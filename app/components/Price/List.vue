@@ -3,9 +3,12 @@
     <!-- Секции -->
     <div v-for="section in pricelist.body" :key="section.title" class="mb-8">
       <!-- Заголовок секции с правым столбцом -->
-      <div class="grid grid-cols-[1fr_142px] items-center px-4 border-b-[3px] border-brand-light mb-4 pb-2">
-        <h2 class="text-lg font-semibold text-brand-light">{{ section.title }}</h2>
-        <div class="text-right font-medium text-brand-light">Стоимость, руб.</div>
+      <div class="grid grid-cols-[1fr_142px] items-center px-4 border-b-[3px]
+      border-brand-light dark:border-brand-light__dark mb-4 pb-2
+           text-brand-light dark:text-brand-light__dark"
+      >
+        <h2 class="text-lg font-semibold">{{ section.title }}</h2>
+        <div class="text-right font-medium">Стоимость, руб.</div>
       </div>
 
       <!-- Таблица -->

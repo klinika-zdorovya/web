@@ -14,29 +14,44 @@ export default {
             colors: {
                 /*'background__dark': '#20201F',*/
 
+                // Light
                 'background': '#F3F8F8',
                 'background-content': '#FAFAFA',
-
-
-                'background-brand': '#144044',
-                'background-brand-dark': '#092325',
                 'background-block': '#EFF4F4',
                 'background-block-hover': '#e7eded',
+                'divider': '#e0e8e9',
+                'divider-green': '#27b379',
+                'color-typography': '#434343',
+
+                // Dark theme variants
+                'background__dark': '#1a1f24',        // Тёмный фон (аналог светлого #F3F8F8)
+                'background-content__dark': '#252e32',// Контентная область (немного светлее фона)
+                'background-block__dark': '#2d383c',  // Блоки (контрастнее основного фона)
+                'background-block-hover__dark': '#344148', // Ховер (ярче базового блока)
+                'divider__dark': '#3a454b',           // Разделители (видимый на тёмном фоне)
+                'color-typography__dark': '#e6edf3',   // Светлый текст (хорошая читаемость)
 
                 'background-brand-green': '#1baf72',
                 'background-brand-green-hover': '#1ba86e',
 
+                // Light
+                'background-brand': '#144044',
+                'background-brand-dark': '#092325',
+
+                // Dark
+                // Brand backgrounds (dark theme)
+                'background-brand__dark': '#1E3A3F',       // Основной брендовый фон
+                'background-brand-dark__dark': '#0F292D',  // Углубленный вариант
+
+                // Light
                 // тексты меню, заголовков, тайтлов
                 'brand-light': '#174f54',
                 'brand-ultra-light': '#C2F8E2',
 
-                'divider': '#e0e8e9',
-                'divider-green': '#27b379',
-
-
-
-
-                'color-typography': '#434343',
+                // Новые тёмные варианты
+                // Dark
+                'brand-light__dark': '#5EC8B8',         // Акцентный бирюзовый (вместо тёмного #174f54)
+                'brand-ultra-light__dark': '#A3E4D6',   // Мягкий неоново-бирюзовый (аналог #C2F8E2 для темно
 
             },
 
