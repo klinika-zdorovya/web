@@ -77,3 +77,8 @@ br {
     display: block;
     margin-bottom: 0.5rem;
 }
+
+/* Анимация перекдючения темы */
+html {
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}

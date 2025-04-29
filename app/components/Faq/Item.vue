@@ -10,7 +10,7 @@
 
     <!-- Answer Block -->
     <div class="w-full lg:w-auto mx-auto lg:mx-0">
-      <div class="w-full inline-block bg-background-block p-4 rounded-lg ">
+      <div class="w-full inline-block bg-background-block dark:bg-background-block__dark p-4 rounded-lg ">
         <div class="flex lg:block ">
           <DoctorCard
               :name="faq.doctorName"

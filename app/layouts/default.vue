@@ -23,7 +23,8 @@
       <nav
           :class="{ 'translate-x-0': isMenuOpen }"
           class="fixed md:relative transform transition-transform duration-300 ease-in-out
-               w-[70vw] md:w-[270px] bg-background-block shadow-lg z-30 h-full
+               w-[70vw] md:w-[270px] shadow-lg z-30 h-full
+               bg-background-block dark:bg-background-block__dark
                md:translate-x-0 -translate-x-full overflow-auto md:overflow-visible"
       >
         <div class="h-full min-h-[calc(100vh - 76px)] flex-col">

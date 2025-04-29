@@ -1,5 +1,5 @@
 <template>
-  <div class="divide-y divide-divider dark:divide-divider__dark">
+  <div class="divide-y dark:divide-divider__dark">
     <DoctorCard
         v-for="(doctor, index) in doctors"
         :key="doctor._id"

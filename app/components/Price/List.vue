@@ -12,18 +12,21 @@
       </div>
 
       <!-- Таблица -->
-      <div class="rounded-lg overflow-hidden border border-gray-100">
+      <div class="rounded-lg overflow-hidden border border-gray-100 dark:border-gray-400">
         <div
             v-for="(service, index) in section.services"
             :key="service.name"
             class="grid grid-cols-[1fr_142px] items-center px-4 py-3"
-            :class="index % 2 === 0 ? 'bg-background-block' : 'bg-background-content'"
+            :class="index % 2 === 0
+            ? 'bg-background-block dark:bg-background-block__dark'
+            : 'bg-background-content dark:bg-background-content__dark'
+            "
         >
           <!-- Название услуги -->
-          <span class="text-gray-900">{{ service.name }}</span>
+          <span class="text-gray-900 dark:text-gray-400">{{ service.name }}</span>
 
           <!-- Цена -->
-          <div class="text-right font-medium text-gray-700">
+          <div class="text-right font-medium text-gray-700 dark:text-gray-200">
             <template v-if="service.minPrice === service.maxPrice">
               {{ formatPrice(service.minPrice) }}
             </template>
