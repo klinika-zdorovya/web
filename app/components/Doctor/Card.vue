@@ -3,9 +3,9 @@
       :class="[
       'transition-all duration-300 transform',
       {
-        'bg-background-block': isOpen,
+        'bg-background-block dark:bg-background-block__dark': isOpen,
         'shadow-2xl': isOpen && view === 'extended',
-        'bg-background-content': !isOpen && view === 'extended'
+        'bg-background-content dark:bg-background-content__dark': !isOpen && view === 'extended'
       },
 
     ]"
@@ -43,7 +43,7 @@
           >
             <div v-if="isOpen" class="overflow-hidden">
               <div ref="content">
-                <p class="text-gray-600 text-justify mt-4 leading-5 md:pr-12" v-html="format.nl2br(doctorData.description)"></p>
+                <p class="text-color-typography dark:text-color-typography__dark text-justify mt-4 leading-5 md:pr-12" v-html="format.nl2br(doctorData.description)"></p>
               </div>
             </div>
           </transition>
@@ -59,7 +59,7 @@
             :src="doctorData?.avatar"
             class="w-24 h-24 rounded-full object-cover mx-auto mb-4"
         >
-        <p class="text-xs text-brand-light leading-4 font-semibold">{{ doctorData?.positionSecond }}</p>
+        <p class="text-xs text-brand-light dark:text-brand-light__dark leading-4 font-semibold">{{ doctorData?.positionSecond }}</p>
       </NuxtLink>
     </div>
 

@@ -4,13 +4,13 @@
     <div class="w-full lg:w-auto lg:mb-0 mx-auto lg:mx-0">
       <div class="w-full inline-block md:mt-5">
         <DateName :date="faq.date" :name="faq.name" />
-        <p class="mt-2 text-color-typography text-sm leading-5">{{ faq.question }}</p>
+        <p class="mt-2 text-color-typography dark:text-color-typography__dark text-sm leading-5">{{ faq.question }}</p>
       </div>
     </div>
 
     <!-- Answer Block -->
     <div class="w-full lg:w-auto mx-auto lg:mx-0">
-      <div class="w-full inline-block bg-background-block p-4 rounded-lg ">
+      <div class="w-full inline-block bg-background-block dark:bg-background-block__dark p-4 rounded-lg ">
         <div class="flex lg:block ">
           <DoctorCard
               :name="faq.doctorName"

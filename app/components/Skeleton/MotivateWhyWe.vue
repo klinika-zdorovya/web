@@ -1,8 +1,8 @@
 <template>
   <div class="relative mt-3 md:mt-5">
     <!-- Абсолютный заголовок -->
-    <div class="absolute left-0 top-0 z-10 w-[145px] h-7 bg-brand-light text-white/90
-    text-[10px] pl-2 items-center justify-center uppercase font-bold">
+    <div class="absolute left-0 top-0 z-10 w-[135px] h-7 bg-brand-light dark:bg-brand-light__dark
+    text-color-typography__dark dark:text-color-typography text-[10px] pl-2 items-center justify-center uppercase font-bold">
       Почему именно мы
     </div>
 

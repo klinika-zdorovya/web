@@ -3,12 +3,20 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/content',
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/color-mode',
   ],
   devtools: { enabled: true },
   css: [
       './app/assets/css/main.css',
       './app/assets/scss/main.scss',
   ],
+  colorMode: {
+    classSuffix: '',
+    preference: 'system',
+    fallback: 'light',
+    storageKey: 'nuxt-color-scheme',    // Явно указываем ключ хранилища
+    dataValue: 'theme',                 // Используем data-theme атрибут для надежности
+  },
   future: {
     compatibilityVersion: 4,
   },

@@ -1,7 +1,10 @@
 <template>
   <li
-      class="relative border-b border-divider text-xs text-brand-light transition
-      bg-background-block hover:bg-background-block-hover uppercase font-semibold"
+      class="relative border-b border-divider dark:border-divider__dark
+      transition uppercase font-semibold
+      text-xs text-brand-light dark:text-brand-light__dark
+      bg-background-block hover:bg-background-block-hover
+      dark:bg-background-block__dark dark:hover:bg-background-block-hover__dark"
       @mouseenter="desktopHover"
       @mouseleave="desktopLeave"
       @click="desktopLeave"
