@@ -12,66 +12,68 @@
       @click="toggleDescription"
   >
 
-    <!-- Extended View -->
-    <div v-if="view === 'extended'" class="flex flex-col lg:flex-row gap-4 lg:gap-6 p-4 lg:p-6 cursor-pointer">
-      <!-- Аватар -->
-      <div class="lg:hidden flex flex-col items-center">
-        <DoctorAvatar :doctor="doctorData" />
-      </div>
+    <client-only>
+      <!-- Extended View -->
+      <div v-if="view === 'extended'" class="flex flex-col lg:flex-row gap-4 lg:gap-6 p-4 lg:p-6 cursor-pointer">
+        <!-- Аватар -->
+        <div class="lg:hidden flex flex-col items-center">
+          <DoctorAvatar :doctor="doctorData" />
+        </div>
 
-      <DoctorInfo :doctor="doctorData" class="md:hidden text-center"/>
+        <DoctorInfo :doctor="doctorData" class="md:hidden text-center"/>
 
-      <!-- Десктопный аватар -->
+        <!-- Десктопный аватар -->
 
-      <DoctorAvatar :doctor="doctorData" class="hidden lg:block" />
-
-      <!-- Контент -->
-      <div class="flex-1">
-        <!-- Десктопные заголовки -->
-        <DoctorInfo :doctor="doctorData" class="hidden lg:block md:block leading-3"/>
+        <DoctorAvatar :doctor="doctorData" class="hidden lg:block" />
 
         <!-- Контент -->
         <div class="flex-1">
-          <!-- Заголовки (без изменений) -->
+          <!-- Десктопные заголовки -->
+          <DoctorInfo :doctor="doctorData" class="hidden lg:block md:block leading-3"/>
 
-          <!-- Анимация для описания -->
-          <transition
-              name="slide"
-              @enter="enter"
-              @leave="leave"
-              @after-enter="afterEnter"
-          >
-            <div v-if="isOpen" class="overflow-hidden">
-              <div ref="content">
-                <p class="text-color-typography dark:text-color-typography__dark text-justify mt-4 leading-5 md:pr-12" v-html="format.nl2br(doctorData.description)"></p>
+          <!-- Контент -->
+          <div class="flex-1">
+            <!-- Заголовки (без изменений) -->
+
+            <!-- Анимация для описания -->
+            <transition
+                name="slide"
+                @enter="enter"
+                @leave="leave"
+                @after-enter="afterEnter"
+            >
+              <div v-if="isOpen" class="overflow-hidden">
+                <div ref="content">
+                  <p class="text-color-typography dark:text-color-typography__dark text-justify mt-4 leading-5 md:pr-12" v-html="format.nl2br(doctorData.description)"></p>
+                </div>
               </div>
-            </div>
-          </transition>
+            </transition>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Short View -->
-    <div v-else-if="view === 'short' && doctorData" class="p-4 text-center">
-      <NuxtLink to="/clinic/doctors">
+      <!-- Short View -->
+      <div v-else-if="view === 'short' && doctorData" class="p-4 text-center">
+        <NuxtLink to="/clinic/doctors">
+          <img
+              :alt="doctorData?.name"
+              :src="doctorData?.avatar"
+              class="w-24 h-24 rounded-full object-cover mx-auto mb-4"
+          >
+          <p class="text-xs text-brand-light dark:text-brand-light__dark leading-4 font-semibold">{{ doctorData?.positionSecond }}</p>
+        </NuxtLink>
+      </div>
+
+      <!-- Avatar View -->
+      <div v-else-if="view === 'avatar'" class="flex items-center gap-4 leading-5 ">
         <img
             :alt="doctorData?.name"
             :src="doctorData?.avatar"
-            class="w-24 h-24 rounded-full object-cover mx-auto mb-4"
+            class="w-10 h-10 rounded-full object-cover"
         >
-        <p class="text-xs text-brand-light dark:text-brand-light__dark leading-4 font-semibold">{{ doctorData?.positionSecond }}</p>
-      </NuxtLink>
-    </div>
-
-    <!-- Avatar View -->
-    <div v-else-if="view === 'avatar'" class="flex items-center gap-4 leading-5 ">
-      <img
-          :alt="doctorData?.name"
-          :src="doctorData?.avatar"
-          class="w-10 h-10 rounded-full object-cover"
-      >
-      <span class="font-medium italic font-spb max-w-40">{{ doctorData?.name }}</span>
-    </div>
+        <span class="font-medium italic font-spb max-w-40">{{ doctorData?.name }}</span>
+      </div>
+    </client-only>
   </div>
 </template>
 
@@ -171,22 +173,3 @@ const leave = (el) => {
   });
 }
 </script>
-
-<style>
-.slide-enter-active,
-.slide-leave-active {
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.slide-enter-from,
-.slide-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-
-.slide-enter-to,
-.slide-leave-from {
-  opacity: 1;
-  transform: translateY(0);
-}
-</style>

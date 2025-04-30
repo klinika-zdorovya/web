@@ -135,3 +135,20 @@ p {
   0%, 100% { opacity: 1 }
   50% { opacity: 0.5 }
 }
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.slide-enter-to,
+.slide-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}

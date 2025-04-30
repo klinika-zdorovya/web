@@ -3,7 +3,6 @@
     <div class="grid md:grid-cols-2 gap-8 mb-8">
       <!-- Левый блок - контактная информация -->
       <div class="space-y-6">
-        <h2>{{ contact.title }}</h2>
         <!-- Адрес -->
         <div class="space-y-2">
           <h3>Адрес</h3>
@@ -42,11 +41,6 @@
             :zoom="16"
         />
       </div>
-    </div>
-
-    <!-- Дополнительная информация -->
-    <div class="md:hidden space-y-4">
-      <p class="text-color-typography dark:text-color-typography__dark">{{ contact.subtitle }}</p>
     </div>
   </div>
 </template>
