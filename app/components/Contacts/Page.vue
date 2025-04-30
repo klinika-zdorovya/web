@@ -33,14 +33,14 @@
         </div>
       </div>
 
-      <!-- Правый блок - карта (оставляем скелетон) -->
       <div class="relative h-96 bg-gray-200 rounded-xl overflow-hidden">
-        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div class="flex flex-col items-center gap-2">
-            <div class="w-8 h-8 bg-gray-300 rounded-full"></div>
-            <div class="h-4 bg-gray-300 rounded w-24"></div>
-          </div>
-        </div>
+        <!-- Карта -->
+        <ContactsYandexMap
+            :address="contact.address"
+            class="h-96"
+            icon="/images/logo/logo-kz.png"
+            :zoom="16"
+        />
       </div>
     </div>
 

@@ -31,4 +31,10 @@ export default defineNuxtConfig({
     }
   },
   sourcemap: false,
+  runtimeConfig: {
+    public: {
+      yandexMapsApiKey: process.env.YANDEX_MAPS_API_KEY
+    }
+  },
+  plugins: ['./app/plugins/yandex-maps.client.ts']
 })
