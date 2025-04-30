@@ -62,6 +62,7 @@ const initMap = async () => {
       const myPlacemark = new $ymaps.Placemark(geoObject.geometry.getCoordinates(), {
         hintContent: `Клиника здоровья, <br />${props.address}`,
       }, {
+        iconLayout: 'default#image',
         iconImageHref: props.icon,
         iconImageSize: [40, 40],
         iconImageOffset: [-20, -20]
