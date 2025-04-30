@@ -1,2 +1,2 @@
-::SkeletonContacts
+::ContactsPage
 ::
