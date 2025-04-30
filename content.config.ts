@@ -24,6 +24,7 @@ export default defineContentConfig({
                 descriptionTitle: z.string(),
             })
         }),
+
         faq: defineCollection({
             type: 'data',
             source: 'data/faq/**.json',
@@ -36,16 +37,28 @@ export default defineContentConfig({
                 doctorName: z.string(),
             })
         }),
+
         pricelist: defineCollection({
             type: 'page',
             source: 'data/pricelist/pricelist.yaml',
         }),
+
         documents: defineCollection({
             type: 'data',
             source: 'data/documents/documents.yaml',
             schema: z.object({
                 title: z.string(),
                 url: z.string(),
+            }),
+        }),
+
+        products: defineCollection({
+            type: 'data',
+            source: 'data/products/**.md',
+            schema: z.object({
+                title: z.string(),
+                imageUrl: z.string(),
+                description: z.string(),
             }),
         }),
     }
