@@ -61,5 +61,20 @@ export default defineContentConfig({
                 description: z.string(),
             }),
         }),
+
+        contacts: defineCollection({
+            type: 'page',
+            source: 'data/contacts/contacts.yaml',
+            schema: z.object({
+                title: z.string(),
+                subtitle: z.string(),
+                description: z.string(),
+                address: z.string(),
+                coords: z.string(),
+                workingTime: z.string(),
+                holidaysTime: z.string(),
+                phones: z.array(z.string()),
+            }),
+        }),
     }
 });
