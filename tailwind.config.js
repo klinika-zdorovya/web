@@ -31,12 +31,19 @@ export default {
                 'divider__dark': '#3a454b',           // Разделители (видимый на тёмном фоне)
                 'color-typography__dark': '#e6edf3',   // Светлый текст (хорошая читаемость)
 
+                // // Brand green colors (light theme)
                 'background-brand-green': '#1baf72',
                 'background-brand-green-hover': '#1ba86e',
+
+                // Brand green colors (dark theme)
+                'background-brand-green__dark': '#15412f',       // Основной зелёный
+                'background-brand-green-hover__dark': '#01331e',  // Ховер-состояние
 
                 // Light
                 'background-brand': '#144044',
                 'background-brand-dark': '#092325',
+
+
 
                 // Dark
                 // Brand backgrounds (dark theme)

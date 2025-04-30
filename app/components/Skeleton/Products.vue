@@ -1,5 +1,5 @@
 <template>
-  <div class="animate-pulse p-4 space-y-8">
+  <div class="p-4 space-y-8">
     <!-- Контейнер товаров -->
     <div class="space-y-10">
       <!-- Блок товара -->

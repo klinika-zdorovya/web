@@ -5,7 +5,7 @@
       <li v-for="(crumb, index) in crumbs" :key="crumb.path">
         <NuxtLink
             :to="crumb.path"
-            class="text-xs hover:text-blue-600 transition-colors"
+            class="text-xs hover:text-color-typography__dark/80 transition-colors"
 
         >
           {{ crumb.title }}
