@@ -1,5 +1,5 @@
 <template>
-  <div class="slider-main relative w-full h-[370px] bg-[#1c96a0] overflow-hidden">
+  <div class="slider-main relative w-full h-[370px] bg-background-brand overflow-hidden">
     <!-- Слайды -->
     <div
         v-for="(slide, index) in sliderCollection"
@@ -16,16 +16,18 @@
         <h2 v-if="slide.subheader" class="font-spb text-white mb-6">
           {{ slide.subheader }}
         </h2>
-        <p class="text-base max-w-2xl leading-4 pr-1" v-html="slide.text.replace(/\n/g, '<br />')"></p>
+        <p class="text-base max-w-2xl leading-4 md:leading-6 md:pr-1" :class="{'mt-12': !slide.subheader}" v-html="format.nl2br(slide.text)"></p>
       </div>
 
       <!-- Правый блок с изображением (только на десктопе) -->
       <div class="hidden xl:block w-1/2 relative">
-        <img
-            :src="slide.imageUrl"
-            alt="Slide image"
-            class="w-full h-full object-cover object-center"
-        >
+        <div class="h-full flex justify-end items-center">
+          <img
+              :src="slide.imageUrl"
+              alt="Slide image"
+              class="h-full max-w-full object-contain opacity-70"
+          >
+        </div>
       </div>
     </div>
 
@@ -44,6 +46,9 @@
 
 <script setup>
 import {ref, onMounted, onUnmounted} from 'vue';
+import {useFormatText} from "~/composable/nl2br.js";
+
+const format = useFormatText();
 
 const {data: sliderData} = await useAsyncData('sliderMain', () => {
   return queryCollection('sliderMain').first()

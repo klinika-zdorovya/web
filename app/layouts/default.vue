@@ -43,20 +43,27 @@
 
       <!-- Основное содержимое -->
       <main class="flex-1 bg-background-content dark:bg-background-content__dark">
-
         <div class="container">
-          <!-- Хлебные крошки -->
+          <!-- Хлебные крошки (скрываем на главной) -->
           <Breadcrumbs
+              v-if="!isHomePage"
               :navigation="navigation"
               class="hidden md:flex bg-background-brand px-16 min-h-32 w-full"
           />
-          <!-- блок контента -->
-          <div class="prose max-w-none mx-auto px-4 my-4 md:my-6 md:px-16 leading-7 min-h-[calc(100vh-278px)]">
-              <transition mode="out-in" name="content-fade">
-                <div class="content-wrapper" :key="$route.path">
-                  <slot />
-                </div>
-              </transition>
+
+          <!-- Блок контента (убираем паддинги на главной) -->
+          <div
+              class="prose max-w-none mx-auto leading-7 min-h-[calc(100vh-278px)]"
+              :class="{'px-4 my-4 md:my-6 md:px-16': !isHomePage}"
+          >
+            <transition
+                mode="out-in"
+                :name="transitionName"
+            >
+              <div class="content-wrapper" :key="$route.path">
+                <slot />
+              </div>
+            </transition>
           </div>
         </div>
       </main>
@@ -67,10 +74,16 @@
 </template>
 
 <script setup>
-import {ref, provide} from 'vue';
-import LogoMain from "~/components/LogoMain.vue";
-import MainFooter from "~/components/MainFooter.vue";
+import {ref, provide, computed} from 'vue';
+import LogoMain from '~/components/LogoMain.vue';
+import MainFooter from '~/components/MainFooter.vue';
+import {useRoute} from 'vue-router';
 
+const route = useRoute();
+const isHomePage = computed(() => route.path === '/');
+const transitionName = computed(() =>
+    isHomePage.value ? 'home-slide' : 'content-fade'
+);
 const isMenuOpen = ref(false);
 const isMobile = ref(false);
 const openItem = ref(null);
@@ -121,6 +134,7 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+/* анимация для всех страниц, кроме главной */
 .content-fade-enter-active,
 .content-fade-leave-active {
   transition: opacity 0.30s, transform 0.1s;
@@ -130,5 +144,24 @@ onBeforeUnmount(() => {
 .content-fade-leave-to {
   opacity: 0;
   transform: translateY(10px);
+}
+
+/* анимация для главной страницы */
+.home-slide-enter-active {
+  transition: all 0.25s ease-out;
+}
+
+.home-slide-leave-active {
+  transition: all 0.15s ease-in;
+}
+
+.home-slide-enter-from {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.home-slide-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
 }
 </style>
