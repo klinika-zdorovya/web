@@ -72,5 +72,16 @@ export default defineContentConfig({
                 phones: z.array(z.string()),
             }),
         }),
+
+        sliderMain: defineCollection({
+            type: 'data',
+            source: 'data/sliders/main.yaml',
+            schema: z.object({
+                header: z.string(),
+                subheader: z.string(),
+                text: z.string(),
+                imageUrl: z.string(),
+            }),
+        }),
     }
 });
