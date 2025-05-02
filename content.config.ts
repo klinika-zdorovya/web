@@ -83,5 +83,14 @@ export default defineContentConfig({
                 imageUrl: z.string(),
             }),
         }),
+
+        sliderMotiv: defineCollection({
+            type: 'data',
+            source: 'data/sliders/motiv.yaml',
+            schema: z.object({
+                text: z.string(),
+                imageUrl: z.string(),
+            }),
+        }),
     }
 });

@@ -1,0 +1,17 @@
+body:
+  - text: "В Клинике работают врачи и специалисты физической культуры и спорта"
+    imageUrl: '/images/slider/motiv/1.png'
+  - text: "Специалисты Клиники имеют ученые степени и звания"
+    imageUrl: '/images/slider/motiv/2.png'
+  - text: "Лечение заболеваний опорно-двигательного аппарата у спортсменов"
+    imageUrl: '/images/slider/motiv/3.png'
+  - text: "Всем пациентам оказывается постоянная консультационная поддержка"
+    imageUrl: '/images/slider/motiv/4.png'
+  - text: "Уникальные методики имеют научное обоснование и прошли практическую апробацию"
+    imageUrl: '/images/slider/motiv/5.png'
+  - text: "Удобный график работы: \n6-дневная рабочая неделя: \n9:00 – 21:00"
+    imageUrl: '/images/slider/motiv/6.png'
+  - text: "Запись на прием ведет врач-специалист"
+    imageUrl: '/images/slider/motiv/7.png'
+  - text: "Удобное расположение клиники возле 5 станций метро"
+    imageUrl: '/images/slider/motiv/8.png'
