@@ -21,7 +21,7 @@
                   alt="Logo"
               >
             </div>
-            <h2 class="uppercase font-spb text-brand-light text-base text-center leading-tight absolute top-40 w-4/5" v-html="format.nl2br(slide.text)"></h2>
+            <h2 class="uppercase font-spb text-brand-light dark:text-brand-light__dark text-base text-center leading-tight absolute top-40 w-4/5" v-html="format.nl2br(slide.text)"></h2>
           </div>
         </div>
       </div>
