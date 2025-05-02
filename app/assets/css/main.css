@@ -4,8 +4,8 @@
 
 html {
     scroll-behavior: smooth;
-    @apply bg-background ;
-    /*@apply dark:bg-background__dark  dark:text-color-typography__dark;*/
+    @apply bg-background text-color-typography;
+    @apply dark:bg-background__dark dark:text-color-typography__dark;
 }
 
 body.menu-open {
@@ -13,7 +13,7 @@ body.menu-open {
 }
 
 body {
-    @apply text-base leading-7 text-color-typography font-proxima-nova;
+    @apply text-base leading-7 text-color-typography dark:text-color-typography__dark font-proxima-nova;
 }
 
 /* Headings */
@@ -70,4 +70,15 @@ p {
     transition-property: transform;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
+}
+
+br {
+    content: '';
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Анимация перекдючения темы */
+html {
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }

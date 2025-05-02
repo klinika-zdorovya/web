@@ -1,2 +1,2 @@
-::SkeletonDocuments
+::DocumentsList
 ::

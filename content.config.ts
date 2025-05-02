@@ -1,4 +1,4 @@
-import {defineContentConfig, defineCollection} from '@nuxt/content';
+import {defineContentConfig, defineCollection, z} from '@nuxt/content';
 
 export default defineContentConfig({
     collections: {
@@ -9,12 +9,88 @@ export default defineContentConfig({
 
         menu: defineCollection({
             type: 'page',
-            source: 'navigation/navigation.yaml',
+            source: 'data/navigation/navigation.yaml',
         }),
 
-        menu2: defineCollection({
+        doctors: defineCollection({
+            type: 'data',
+            source: 'data/doctors/**.json',
+            schema: z.object({
+                name: z.string(),
+                positionFirst: z.string(),
+                positionSecond: z.string(),
+                avatar: z.string(),
+                description: z.string(),
+                descriptionTitle: z.string(),
+            })
+        }),
+
+        faq: defineCollection({
+            type: 'data',
+            source: 'data/faq/**.json',
+            schema: z.object({
+                date: z.string(),
+                name: z.string(),
+                question: z.string(),
+                avatar: z.string(),
+                answer: z.string(),
+                doctorName: z.string(),
+            })
+        }),
+
+        pricelist: defineCollection({
             type: 'page',
-            source: 'navigation/menu.json',
+            source: 'data/pricelist/pricelist.yaml',
+        }),
+
+        documents: defineCollection({
+            type: 'data',
+            source: 'data/documents/documents.yaml',
+            schema: z.object({
+                title: z.string(),
+                url: z.string(),
+            }),
+        }),
+
+        products: defineCollection({
+            type: 'data',
+            source: 'data/products/**.md',
+            schema: z.object({
+                title: z.string(),
+                imageUrl: z.string(),
+                description: z.string(),
+            }),
+        }),
+
+        contacts: defineCollection({
+            type: 'page',
+            source: 'data/contacts/contacts.yaml',
+            schema: z.object({
+                address: z.string(),
+                workingTime: z.string(),
+                holidaysTime: z.string(),
+                phones: z.array(z.string()),
+            }),
+        }),
+
+        sliderMain: defineCollection({
+            type: 'data',
+            source: 'data/sliders/main.yaml',
+            schema: z.object({
+                header: z.string(),
+                subheader: z.string(),
+                text: z.string(),
+                imageUrl: z.string(),
+            }),
+        }),
+
+        sliderMotiv: defineCollection({
+            type: 'data',
+            source: 'data/sliders/motiv.yaml',
+            schema: z.object({
+                text: z.string(),
+                imageUrl: z.string(),
+            }),
         }),
     }
 });

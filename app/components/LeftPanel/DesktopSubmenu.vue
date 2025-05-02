@@ -7,13 +7,13 @@
     <ul class="w-[350px]">
       <li v-for="child in children"
           :key="child.path"
-          class="my-0 py-2 px-8 border-b leading-5
-          border-divider-green bg-background-brand-green hover:bg-background-brand-green-hover"
+          class="my-0 py-2 px-8 border-b leading-5 border-divider-green dark:border-divider__dark
+          bg-background-brand-green dark:bg-background-brand__dark
+          hover:bg-background-brand-green-hover dark:hover:bg-background-block-hover__dark"
       >
         <NuxtLink
             :to="child.path"
-            class="block text-xs text-white
-            uppercase font"
+            class="block text-xs text-white dark:text-color-typography__dark uppercase"
             @click="close"
         >
           {{ child.title }}

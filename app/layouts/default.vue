@@ -3,7 +3,7 @@
     <!-- Шапка для мобильной версии -->
     <header class="bg-brand-light shadow-md fixed w-full z-40 md:hidden">
       <div class="container mx-auto px-4 h-16 flex items-center justify-between text-brand-ultra-light">
-        <NuxtLink class="text-xl font-bold  font-spb uppercase " to="/">
+        <NuxtLink to="/">
           <LogoMain />
         </NuxtLink>
         <button
@@ -18,18 +18,19 @@
     </header>
 
     <!-- Основной контент и меню -->
-    <div class="flex mt-16 md:mt-0">
+    <div class="flex mt-16 md:mt-0 relative">
       <!-- Боковое меню -->
       <nav
           :class="{ 'translate-x-0': isMenuOpen }"
           class="fixed md:relative transform transition-transform duration-300 ease-in-out
-               w-[70vw] md:w-[270px] bg-background-block shadow-lg z-30 h-full
+               w-[70vw] md:w-[270px] shadow-lg z-30 h-full
+               bg-background-block dark:bg-background-block__dark
                md:translate-x-0 -translate-x-full overflow-auto md:overflow-visible"
       >
         <div class="h-full min-h-[calc(100vh - 76px)] flex-col">
           <LeftPanelLogo />
           <LeftPanelNavigation :navigation="navigation" @close-menu="closeMenu" />
-          <SkeletonDoctor view="brief" />
+          <DoctorCard name="Родичкин" view="short" />
         </div>
       </nav>
 
@@ -41,20 +42,28 @@
       ></div>
 
       <!-- Основное содержимое -->
-      <main class="flex-1 bg-background-content">
+      <main class="flex-1 bg-background-content dark:bg-background-content__dark">
         <div class="container">
-          <!-- Хлебные крошки -->
+          <!-- Хлебные крошки (скрываем на главной) -->
           <Breadcrumbs
+              v-if="!isHomePage"
               :navigation="navigation"
               class="hidden md:flex bg-background-brand px-16 min-h-32 w-full"
           />
-          <!-- блок контента -->
-          <div class="prose max-w-none mx-auto px-4 my-4 md:my-6 md:px-16 leading-7 min-h-[calc(100vh-278px)]">
-              <transition mode="out-in" name="content-fade">
-                <div class="content-wrapper" :key="$route.path">
-                  <slot />
-                </div>
-              </transition>
+
+          <!-- Блок контента (убираем паддинги на главной) -->
+          <div
+              class="prose max-w-none mx-auto leading-7 min-h-[calc(100vh-278px)]"
+              :class="{'px-4 my-4 md:my-6 md:px-16': !isHomePage}"
+          >
+            <transition
+                mode="out-in"
+                :name="transitionName"
+            >
+              <div class="content-wrapper" :key="$route.path">
+                <slot />
+              </div>
+            </transition>
           </div>
         </div>
       </main>
@@ -65,10 +74,16 @@
 </template>
 
 <script setup>
-import {ref, provide} from 'vue';
-import LogoMain from "~/components/LogoMain.vue";
-import MainFooter from "~/components/MainFooter.vue";
+import {ref, provide, computed} from 'vue';
+import LogoMain from '~/components/LogoMain.vue';
+import MainFooter from '~/components/MainFooter.vue';
+import {useRoute} from 'vue-router';
 
+const route = useRoute();
+const isHomePage = computed(() => route.path === '/');
+const transitionName = computed(() =>
+    isHomePage.value ? 'home-slide' : 'content-fade'
+);
 const isMenuOpen = ref(false);
 const isMobile = ref(false);
 const openItem = ref(null);
@@ -118,7 +133,8 @@ onBeforeUnmount(() => {
 
 </script>
 
-<style>
+<style scoped>
+/* анимация для всех страниц, кроме главной */
 .content-fade-enter-active,
 .content-fade-leave-active {
   transition: opacity 0.30s, transform 0.1s;
@@ -129,10 +145,23 @@ onBeforeUnmount(() => {
   opacity: 0;
   transform: translateY(10px);
 }
+
+/* анимация для главной страницы */
+.home-slide-enter-active {
+  transition: all 0.25s ease-out;
+}
+
+.home-slide-leave-active {
+  transition: all 0.15s ease-in;
+}
+
+.home-slide-enter-from {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.home-slide-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
 </style>
-
-
-
-То есть, как видишь, шрифт определяется как petersburg-web. Хз, что это за шрифт, может, переименованный, может, редкий, может плохо искал, может, нет в бесплатном доступе. Ну, не суть. Пытаюсь подобрать подходящий, взял шрифт "Petersburg Cyrillic". Вроде, и близок, но как будто не так, у меня с глазомером то тут не очень, но, кажется, начертание не то, а других нет.
-
-Может, посоветуешь какой-нибудь шрифт такого плана. То есть, навскидку, что то типа: "университет" + "засечки". Не знаю, как правильно сформулировать

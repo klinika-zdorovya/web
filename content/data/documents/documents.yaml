@@ -1,0 +1,17 @@
+body:
+  - title: "Название документа №1"
+    url: '/images/documents/1.jpg'
+  - title: "Название документа №2"
+    url: '/images/documents/2.jpg'
+  - title: "Название документа №3"
+    url: '/images/documents/3.jpg'
+  - title: "Название документа №4"
+    url: '/images/documents/4.jpg'
+  - title: "Название документа №5"
+    url: '/images/documents/5.jpg'
+  - title: "Название документа №6"
+    url: '/images/documents/6.jpg'
+  - title: "Название документа №7"
+    url: '/images/documents/7.jpg'
+  - title: "Название документа №8"
+    url: '/images/documents/8.jpg'
