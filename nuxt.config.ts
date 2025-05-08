@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   ],
   colorMode: {
     classSuffix: '',
-    preference: 'system',
+    preference: 'light',
     fallback: 'light',
     storageKey: 'nuxt-color-scheme',    // Явно указываем ключ хранилища
     dataValue: 'theme',                 // Используем data-theme атрибут для надежности
