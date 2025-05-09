@@ -34,6 +34,17 @@ const crumbs = computed(() => {
   const fullPath = route.path;
   const items = getParentItems(fullPath, props.navigation);
 
+  // ручной маппинг для исключений
+  if (items && items.length) {
+    items.map((item) => {
+      if (item.path === '/news/') {
+        item.path = '/newslist/'
+      }
+
+      return item;
+    });
+  }
+
   return [{ title: 'Главная', path: '/' }, ...items];
 })
 

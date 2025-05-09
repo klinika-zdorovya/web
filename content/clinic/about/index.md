@@ -14,5 +14,8 @@ text: ведущие врачи клиники
 ---
 ::
 
-::SkeletonMotivateWhyWe
+::SliderMotiv
+---
+view: list
+---
 ::
