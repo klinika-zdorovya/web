@@ -92,5 +92,15 @@ export default defineContentConfig({
                 imageUrl: z.string(),
             }),
         }),
+
+        news: defineCollection({
+            type: 'page',
+            source: 'news/**.md',
+            schema: z.object({
+                date: z.string(),
+                title: z.string(),
+                preview: z.string(),
+            }),
+        })
     }
 });

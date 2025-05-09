@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import {useFormatText} from "~/composable/nl2br.js";
+import {useFormatText} from "~/composable/format.ts";
 
 const format = useFormatText();
 

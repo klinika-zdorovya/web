@@ -63,6 +63,15 @@ body:
     fullTitle: Отзывы о клинике
     path: /reviews/
 
+  - title: Новости
+    fullTitle: Все новости
+    path: /news/
+    hideInMenu: true
+
+  - title: Новости
+    fullTitle: Все новости
+    path: /newslist/
+
   - title: Контактная информация
     fullTitle: Контактная информация
     path: /contacts/
