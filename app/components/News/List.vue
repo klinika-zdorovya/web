@@ -1,6 +1,7 @@
 <template>
-  <div class="mx-auto">
-    <div v-if="newsData?.length">
+  <div class="mx-auto relative">
+    <sticker text="Новости клиники" />
+    <div v-if="newsData?.length" class="pt-9">
       <NewsCard
           v-for="item in newsData"
           :key="item._path"
@@ -23,14 +24,10 @@ const ITEMS_PER_PAGE = 2;
 const { data: newsData } = await useAsyncData(
     `news-list`,
     async () => {
-      const news = await queryCollection('news')
+      return await queryCollection('news')
           .order('date', 'DESC')
           .limit(ITEMS_PER_PAGE)
           .all();
-
-      console.log('news', news);
-
-      return news;
     }
 );
 

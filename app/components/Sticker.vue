@@ -1,11 +1,11 @@
 <template>
-  <NuxtLink
+  <div
       class="
-      absolute top-0 left-0 px-5
-      bg-background-brand-green__dark text-brand-ultra-light"
+      absolute top-0 left-0 px-5 pt-1 z-10
+      bg-brand-light text-color-typography__dark text-[10px] font-bold uppercase"
   >
-    <slot>{{ text }}</slot>
-  </NuxtLink>
+    {{ text }}
+  </div>
 </template>
 
 <script lang="ts" setup>

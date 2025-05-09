@@ -1,8 +1,9 @@
 <template>
   <div
-      class="motiv-slider h-[300px] cursor-pointer overflow-hidden mb-7"
+      class="motiv-slider h-[300px] cursor-pointer overflow-hidden mb-7 relative"
       @click="handleClick"
   >
+    <Sticker text="Почему именно мы" />
     <transition name="fade" mode="out-in">
       <div
           :key="currentGroupIndex"
