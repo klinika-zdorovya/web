@@ -1,4 +1,3 @@
-
 <template>
   <div class="mx-auto">
     <div v-if="newsData?.news?.length">
@@ -11,23 +10,11 @@
           :path="item.path"
       />
 
-      <!-- Пагинация (остается без изменений) -->
-      <div class="mt-10 flex items-center justify-between border-t border-separate pt-6">
-        <MainButton
-            v-if="currentPage > 1"
-            text="← Назад"
-            :url="`/newslist/${currentPage - 1}`"
-        />
-
-        <span class="text-sm">
-          Страница {{ currentPage }} из {{ totalPages }}
-        </span>
-        <MainButton
-            v-if="currentPage < totalPages"
-            text="Вперед →"
-            :url="`/newslist/${currentPage + 1}`"
-        />
-      </div>
+      <Pagination
+          :base-url="baseUrl"
+          :current-page="currentPage"
+          :total-pages="totalPages"
+      />
     </div>
 
     <div v-else class="text-gray-600 text-center py-12">
@@ -37,13 +24,14 @@
 </template>
 
 <script setup>
-const ITEMS_PER_PAGE = 3;
-const route = useRoute();
+const ITEMS_PER_PAGE = 3
+const route = useRoute()
+const baseUrl = '/newslist' // Может быть передан как пропс при использовании в других местах
 
 const currentPage = computed(() => {
-  const page = parseInt(route.params.page) || 1;
-  return page > 0 ? page : 1;
-});
+  const page = parseInt(route.params.page) || 1
+  return page > 0 ? page : 1
+})
 
 const { data: newsData } = await useAsyncData(
     `news-${currentPage.value}`,
@@ -55,16 +43,16 @@ const { data: newsData } = await useAsyncData(
             .skip((currentPage.value - 1) * ITEMS_PER_PAGE)
             .all(),
         queryCollection('news').count()
-      ]);
-      return { news, total };
+      ])
+      return {news, total}
     }
-);
+)
 
 const totalPages = computed(() =>
     Math.ceil(newsData.value?.total / ITEMS_PER_PAGE) || 1
-);
+)
 
 if (currentPage.value > totalPages.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Страница не найдена' });
+  throw createError({statusCode: 404, statusMessage: 'Страница не найдена'})
 }
 </script>
