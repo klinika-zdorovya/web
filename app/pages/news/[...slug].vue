@@ -26,9 +26,9 @@
 </template>
 
 <script setup lang="ts">
-import {useFormatText} from "~/composable/format.ts";
-const route = useRoute();
+import {useFormatText} from '~/composable/format';
 const format = useFormatText();
+const route = useRoute();
 
 const { data: page } = await useAsyncData('page-' + route.path, () => {
   return queryCollection('news').path(route.path).first();

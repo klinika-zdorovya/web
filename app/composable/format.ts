@@ -6,7 +6,7 @@ export const useFormatText = () => {
             .replace(/ {2}/g, '&nbsp;&nbsp;');
     }
 
-    const formatDate = (dateString) => {
+    const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString('ru-RU', {
             year: 'numeric',
             month: 'long',

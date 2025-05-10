@@ -101,6 +101,16 @@ export default defineContentConfig({
                 title: z.string(),
                 preview: z.string(),
             }),
+        }),
+
+        reviews: defineCollection({
+            type: 'page',
+            source: 'reviews/**.md',
+            schema: z.object({
+                date: z.string(),
+                author: z.string(),
+                authorPhoto: z.string(),
+            }),
         })
     }
 });
