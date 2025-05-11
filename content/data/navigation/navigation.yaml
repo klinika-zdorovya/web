@@ -53,7 +53,7 @@ body:
 
   - title: Публикации
     fullTitle: Публикации
-    path: /publications/
+    path: /publications/list/
 
   - title: Вопрос–ответ
     fullTitle: Вопрос–ответ

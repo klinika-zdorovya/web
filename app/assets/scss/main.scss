@@ -124,6 +124,14 @@ p {
     content: '▪';
     font-size: 0.9em;
   }
+
+  table {
+    @apply my-4;
+
+    td {
+      @apply px-4 py-2 border-separate border;
+    }
+  }
 }
 
 // анимация для скелетонов
