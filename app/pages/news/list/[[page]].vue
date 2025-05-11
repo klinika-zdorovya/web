@@ -26,7 +26,7 @@
 <script setup>
 const ITEMS_PER_PAGE = 3
 const route = useRoute()
-const baseUrl = '/newslist' // Может быть передан как пропс при использовании в других местах
+const baseUrl = '/news/list' // Может быть передан как пропс при использовании в других местах
 
 const currentPage = computed(() => {
   const page = parseInt(route.params.page) || 1

@@ -70,7 +70,7 @@ body:
 
   - title: Новости
     fullTitle: Все новости
-    path: /newslist/
+    path: /news/list/
 
   - title: Контактная информация
     fullTitle: Контактная информация

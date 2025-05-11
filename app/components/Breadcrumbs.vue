@@ -32,18 +32,26 @@ const props = defineProps({
 
 const crumbs = computed(() => {
   const fullPath = route.path;
-  const items = getParentItems(fullPath, props.navigation);
+  let items = getParentItems(fullPath, props.navigation);
 
   // ручной маппинг для исключений
   if (items && items.length) {
     items.map((item) => {
       if (item.path === '/news/') {
-        item.path = '/newslist/'
+        item.path = '/news/list/'
       }
 
       return item;
     });
   }
+
+  // убираем дубли по полю path
+  const seenPaths = new Set();
+  items = items.filter(item => {
+    if (seenPaths.has(item.path)) return false;
+    seenPaths.add(item.path);
+    return true;
+  });
 
   return [{ title: 'Главная', path: '/' }, ...items];
 })

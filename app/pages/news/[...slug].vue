@@ -2,7 +2,7 @@
   <div class="container mx-auto">
     <MainButton
         text="← Все новости"
-        url="/newslist"
+        url="/news/list"
     />
 
     <article class="p-8 pt-0 rounded-lg shadow-md">
