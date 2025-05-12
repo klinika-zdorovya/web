@@ -53,7 +53,7 @@ body:
 
   - title: Публикации
     fullTitle: Публикации
-    path: /publications/
+    path: /publications/list/
 
   - title: Вопрос–ответ
     fullTitle: Вопрос–ответ
@@ -62,6 +62,15 @@ body:
   - title: Отзывы
     fullTitle: Отзывы о клинике
     path: /reviews/
+
+  - title: Новости
+    fullTitle: Все новости
+    path: /news/
+    hideInMenu: true
+
+  - title: Новости
+    fullTitle: Все новости
+    path: /news/list/
 
   - title: Контактная информация
     fullTitle: Контактная информация

@@ -1,53 +1,70 @@
 <template>
   <div
-      class="motiv-slider h-[300px] cursor-pointer overflow-hidden mb-7"
+      class="motiv-slider cursor-pointer mb-7 relative"
+      :class="{
+      'h-[300px] overflow-hidden': view === 'slider',
+      'overflow-visible': view === 'list'
+    }"
       @click="handleClick"
   >
-    <transition name="fade" mode="out-in">
-      <div
-          :key="currentGroupIndex"
-          class="h-full lg:flex md:justify-between"
-      >
+    <Sticker text="Почему именно мы" />
+
+    <template v-if="view === 'slider'">
+      <transition name="fade" mode="out-in">
         <div
-            v-for="(slide, index) in currentGroup"
-            :key="index"
-            class="h-full lg:w-[33.2%]"
+            :key="currentGroupIndex"
+            class="h-full lg:flex md:justify-between"
         >
-          <div class="h-full flex flex-col items-center bg-brand-ultra-light__dark/30 relative">
-            <div class="flex-1 flex items-center justify-center w-full mb-28">
-              <img
-                  :src="slide.imageUrl"
-                  class="h-20 object-contain"
-                  alt="Logo"
-              >
-            </div>
-            <h2 class="uppercase font-spb text-brand-light dark:text-brand-light__dark text-base text-center leading-tight absolute top-40 w-4/5" v-html="format.nl2br(slide.text)"></h2>
+          <div
+              v-for="(slide, index) in currentGroup"
+              :key="index"
+              class="h-full lg:w-[33.2%]"
+          >
+            <SliderCard :slide="slide" :view="view" />
           </div>
         </div>
+      </transition>
+    </template>
+
+    <template v-else>
+      <div class="flex flex-wrap gap-y-1 gap-x-[0.2%]">
+        <div
+            v-for="(slide, index) in sliderMotivCollection"
+            :key="index"
+            class="lg:w-[33.2%] md:w-[49.5%] w-full"
+        >
+          <SliderCard :slide="slide" :view="view" class="py-10" />
+        </div>
       </div>
-    </transition>
+    </template>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import {useFormatText} from "~/composable/nl2br.js";
+import {useFormatText} from "~/composable/format.ts";
 
-const format = useFormatText();
+const props = defineProps({
+  view: {
+    type: String,
+    default: 'slider',
+    validator: (value) => ['slider', 'list'].includes(value),
+  },
+});
 
 const { data: sliderMotivData } = await useAsyncData('sliderMotiv', () => {
   return queryCollection('sliderMotiv').first();
 });
 
 const sliderMotivCollection = sliderMotivData.value.meta.body;
-
+const format = useFormatText();
 const isMobile = ref(false);
 const currentGroupIndex = ref(0);
 let interval = null;
 
 const groupSize = computed(() => isMobile.value ? 1 : 3);
-
 const currentGroup = computed(() => {
+  if (props.view === 'list') return [];
   const size = groupSize.value;
   const start = currentGroupIndex.value * size;
   return Array.from({ length: size }, (_, i) => {
@@ -59,12 +76,16 @@ const currentGroup = computed(() => {
 const nextGroup = () => currentGroupIndex.value += 1;
 
 const handleClick = () => {
-  nextGroup();
-  resetInterval();
+  if (props.view === 'slider') {
+    nextGroup();
+    resetInterval();
+  }
 };
 
 const startInterval = () => {
-  interval = setInterval(nextGroup, 8000);
+  if (props.view === 'slider') {
+    interval = setInterval(nextGroup, 8000);
+  }
 };
 
 const resetInterval = () => {
@@ -77,9 +98,11 @@ const updateIsMobile = () => {
 };
 
 onMounted(() => {
-  updateIsMobile();
-  window.addEventListener('resize', updateIsMobile);
-  startInterval();
+  if (props.view === 'slider') {
+    updateIsMobile();
+    window.addEventListener('resize', updateIsMobile);
+    startInterval();
+  }
 });
 
 onUnmounted(() => {
@@ -99,4 +122,12 @@ onUnmounted(() => {
   opacity: 0;
 }
 
+.list-card {
+  transition: opacity 0.3s ease;
+  cursor: crosshair;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
 </style>

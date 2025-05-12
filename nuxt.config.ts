@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   ],
   colorMode: {
     classSuffix: '',
-    preference: 'system',
+    preference: 'light',
     fallback: 'light',
     storageKey: 'nuxt-color-scheme',    // Явно указываем ключ хранилища
     dataValue: 'theme',                 // Используем data-theme атрибут для надежности
@@ -36,5 +36,8 @@ export default defineNuxtConfig({
       yandexMapsApiKey: '1c0b9327-7844-434a-a494-cfe26e5759de', //process.env.YANDEX_MAPS_API_KEY
     }
   },
-  plugins: ['./app/plugins/yandex-maps.client.ts']
+  plugins: ['./app/plugins/yandex-maps.client.ts'],
+  routeRules: {
+    '/publications/list/:page': { prerender: true },
+  },
 })

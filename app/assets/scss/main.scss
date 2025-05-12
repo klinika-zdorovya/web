@@ -124,6 +124,26 @@ p {
     content: '▪';
     font-size: 0.9em;
   }
+
+  table {
+    @apply my-4;
+
+    td {
+      @apply px-4 py-2 border-separate border;
+    }
+  }
+
+  ol {
+    list-style-type: decimal;
+    margin-left: 1.5rem;
+    counter-reset: list-counter;
+  }
+
+  ol > li {
+    counter-increment: list-counter;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
 }
 
 // анимация для скелетонов

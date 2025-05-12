@@ -92,5 +92,37 @@ export default defineContentConfig({
                 imageUrl: z.string(),
             }),
         }),
+
+        news: defineCollection({
+            type: 'page',
+            source: 'news/**.md',
+            schema: z.object({
+                date: z.string(),
+                title: z.string(),
+                preview: z.string(),
+            }),
+        }),
+
+        reviews: defineCollection({
+            type: 'page',
+            source: 'reviews/**.md',
+            schema: z.object({
+                date: z.string(),
+                author: z.string(),
+                authorPhoto: z.string(),
+            }),
+        }),
+
+        publications: defineCollection({
+            type: 'page',
+            source: 'publications/**.md',
+            schema: z.object({
+                date: z.string(),
+                title: z.string(),
+                titlePhoto: z.string(),
+                authors: z.string(),
+                annotation: z.string(),
+            }),
+        })
     }
 });

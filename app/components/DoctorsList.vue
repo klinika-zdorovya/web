@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="divide-y divide-divider dark:divide-divider__dark">
     <DoctorCard
         v-for="(doctor, index) in doctors"

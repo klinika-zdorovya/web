@@ -2,7 +2,7 @@
   <div class="flex-1">
     <ul>
       <LeftPanelNavigationItem
-          v-for="link in navigation"
+          v-for="link in displayedMenu"
           :key="link.path"
           :item="link"
           @item-clicked="clickOnItem"
@@ -21,6 +21,10 @@ const {navigation} = defineProps({
 })
 
 const emit = defineEmits(['close-menu']);
+
+const displayedMenu = computed(() => {
+  return navigation.filter(item => !item.hideInMenu)
+});
 
 const clickOnItem = () => {
   emit('close-menu');
