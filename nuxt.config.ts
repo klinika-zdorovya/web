@@ -40,9 +40,4 @@ export default defineNuxtConfig({
   routeRules: {
     '/publications/list/:page': { prerender: true },
   },
-  nitro: {
-    output: {
-      dir: './output-kz'
-    }
-  }
 })
