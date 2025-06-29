@@ -3,59 +3,49 @@ name: Deploy to FTP
 on:
   push:
     branches:
-      - main  # или другая основная ветка
+      - main
     paths-ignore:
-      - 'README.md'  # игнорировать изменения в определенных файлах
+      - 'README.md'
       - 'docs/**'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 30  # установить таймаут для задания
+    timeout-minutes: 30
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2  # обновленная версия action
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'  # указать конкретную версию Node.js
+          node-version: '20'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: |
-          npm install 
+        run: npm ci
 
       - name: Build project
         run: |
-          npm run generate
+          npm run generate || (echo "Build failed" && exit 1)
           echo "Build completed"
 
       - name: Verify build output
         run: |
           echo "Checking build output directory..."
-          ls -la .output/public/  # проверить содержимое директории
-          echo "Directory contents:"
-          find .output/public/ -type f  # вывести список всех файлов
-
-      - name: Cleanup previous deployment
-        run: |
-          # Очистить целевую директорию перед деплоем
-          echo "Cleaning up previous deployment..."
-          rm -rf .output/public/*
+          ls -la .output/
+          ls -la .output/public/ || echo "No public directory"
+          echo "Directory tree:"
+          find .output/ -type d
 
       - name: FTP Deploy
         if: success()
-        uses: SamKirkland/FTP-Deploy-Action@4.2.0  # обновленная версия action
+        uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: .output/public/
           server-dir: /
-          exclude: '**/.git*'  # исключить ненужные файлы
-          allow: '**/*'  # указать, какие файлы нужно развернуть
-
-      - name: Deployment complete
-        if: success()
-        run: echo "Deployment to FTP completed successfully!"
+          exclude: '**/.git*'
