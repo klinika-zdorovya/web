@@ -36,4 +36,3 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./output-kz/public/  # Обратите внимание на точку в начале
           server-dir: /
-          dangerous-clean-slate: true
