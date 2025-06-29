@@ -7,7 +7,7 @@
         src="/images/logo/logo-kz.png"
     />
     <div class="flex flex-col leading-none -ml-1 text-xl font-bold  font-spb uppercase">
-      <div class="text-white">Клиника</div>
+      <div class="text-brand-ultra-light">Клиника</div>
       <div class="text-brand-ultra-light">Здоровья</div>
     </div>
   </div>

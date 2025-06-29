@@ -7,20 +7,27 @@
         <div class="space-y-2">
           <h3>Адрес</h3>
           <p class="">{{ contact.address }}</p>
+          <p>
+            <span class="bg-green-400 rounded p-2">❗️{{ contact.comment }}</span>
+          </p>
         </div>
 
         <!-- Телефоны -->
         <div class="space-y-2">
           <h3>Телефон<span v-if="contact.phones.length > 1">ы</span></h3>
           <div class="space-y-1">
-            <a
-                v-for="(phone, index) in contact.phones"
-                :key="index"
-                :href="`tel:${phone}`"
-                class="block hover:text-background-brand dark:hover:text-brand-ultra-light transition-colors"
+            <div
+                v-for="(item) in contact.phones"
+                class="flex flex-wrap flex-row items-center gap-2"
             >
-              {{ formatPhone(phone) }}
-            </a>
+              <span>{{ item.description }}: </span>
+              <a
+                  :href="`tel:${item.phone}`"
+                  class="block hover:text-background-brand dark:hover:text-brand-ultra-light transition-colors"
+              >
+                {{ formatPhone(item.phone) }}
+              </a>
+            </div>
           </div>
         </div>
 

@@ -68,8 +68,12 @@ export default defineContentConfig({
             schema: z.object({
                 address: z.string(),
                 workingTime: z.string(),
+                comment: z.string(),
                 holidaysTime: z.string(),
-                phones: z.array(z.string()),
+                phones: z.array(z.object({
+                    phone: z.string(),
+                    description: z.string(),
+                })),
             }),
         }),
 
