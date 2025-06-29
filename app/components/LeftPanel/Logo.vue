@@ -5,7 +5,7 @@
     </NuxtLink>
     <div class="phone text-center text-white text-xs font-bold leading-tight">
       <div class="">Запись по телефону</div>
-      <a href="tel:78129042767" class="block pb-1.5 no-underline text-2xl font-extrabold -tracking-[0.01em]">+7 (812) 904-27-67</a>
+      <a href="tel:78129042767" class="block pb-1.5 no-underline text-2xl font-extrabold -tracking-[0.01em]">+7 (921) 904-27-67</a>
     </div>
   </div>
 </template>
