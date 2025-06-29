@@ -1,44 +1,39 @@
-name: Auto Deploy on Commit
-
 on:
   push:
-    branches:
-      - main
+  workflow_dispatch:
+
+name: Deploy website on push
 
 jobs:
-  deploy:
+  web-deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Get latest code
+        uses: actions/checkout@v2
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: '20'  # Укажите нужную версию Node.js
+          node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Run generate script
-        run: npm run generate
-
-      - name: Debug files
+      - name: Generate with debug
         run: |
-          ls -la
-          find . -type d -name "public" -o -name "dist" -o -name "out"
+            npm run generate
+            echo "Build finished, checking output..."
+            ls -la .output || echo "No output dir"
+            ls -la .output/public || echo "No public dir"
+            ls -la .dist || echo "No dist dir"
 
-      - name: Verify generated files
-        run: |
-          ls -la .output
-          ls -la .output/public
-          ls -la dist
-
-      - name: Deploy to FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      - name: Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./public/
-          server-dir: /  # Укажите путь к директории на хостинге
+          local-dir: ./dist/
+          server-dir: /
+          dangerous-clean-slate: true
