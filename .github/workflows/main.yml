@@ -4,8 +4,8 @@ on: push
 
 jobs:
   deploy:
-    runs-on: macos-latest
-    
+    runs-on: ubuntu-latest  # Рекомендую использовать ubuntu вместо macos для экономии времени
+
     steps:
       - uses: actions/checkout@v2
 
@@ -18,14 +18,15 @@ jobs:
         run: npm install
 
       - name: Build project
-        run: npm run generate
+        run: npm run generate  # или npm run build для SSR
 
       - name: Verify output
         run: |
           echo "Current directory:"
           pwd
           echo "Contents:"
-          ls -R ./.output/public/
+          ls -R ./.output/public/ || echo "Trying alternative location..."
+          ls -R ./dist/ || echo "No output directory found"
 
       - name: FTP Deploy
         if: success()
@@ -34,5 +35,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./.output/public/  # Обратите внимание на точку в начале
+          local-dir: ./.output/public/  # или ./dist/ если файлы там
           server-dir: /
