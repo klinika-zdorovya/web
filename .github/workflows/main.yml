@@ -34,6 +34,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./.output/public/  # Обратите внимание на точку в начале
+          local-dir: ./.output-kz/public/  # Обратите внимание на точку в начале
           server-dir: /
           dangerous-clean-slate: true
