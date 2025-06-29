@@ -1,42 +1,66 @@
 name: Deploy to FTP
 
-on: push
+on:
+  push:
+    branches:
+      - main  # или другая основная ветка
+    paths-ignore:
+      - 'README.md'  # игнорировать изменения в определенных файлах
+      - 'docs/**'
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Рекомендую использовать ubuntu вместо macos для экономии времени
+    runs-on: ubuntu-latest
+    timeout-minutes: 30  # установить таймаут для задания
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3  # обновленная версия action
 
-      - name: Setup Node
-        uses: actions/setup-node@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '20'  # указать конкретную версию Node.js
+          cache: 'npm'  # включить кэширование зависимостей
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm ci  # использовать npm ci для воспроизводимой установки
+          npm run lint  # добавить проверку кода
+
+      - name: Run tests
+        run: npm test  # добавить выполнение тестов
 
       - name: Build project
-        run: npm run generate  # или npm run build для SSR
-
-      - name: Debug folder structure
-        run: find . -type d
-
-      - name: Verify output
         run: |
-          echo "Current directory:"
-          pwd
-          echo "Contents:"
-          ls -R .output/public/ || echo "Trying alternative location..."
-          ls -R .output/ || echo "Trying alternative location..."
+          npm run generate
+          echo "Build completed"
+
+      - name: Verify build output
+        run: |
+          echo "Checking build output directory..."
+          ls -la .output/public/  # проверить содержимое директории
+          echo "Directory contents:"
+          find .output/public/ -type f  # вывести список всех файлов
+
+      - name: Cleanup previous deployment
+        run: |
+          # Очистить целевую директорию перед деплоем
+          echo "Cleaning up previous deployment..."
+          rm -rf .output/public/*
 
       - name: FTP Deploy
         if: success()
-        uses: SamKirkland/FTP-Deploy-Action@4.2.0
+        uses: SamKirkland/FTP-Deploy-Action@v4  # обновленная версия action
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: .output/public/  # или ./dist/ если файлы там
+          local-dir: .output/public/
           server-dir: /
+          exclude: '**/.git*'  # исключить ненужные файлы
+          allow: '**/*'  # указать, какие файлы нужно развернуть
+
+      - name: Deployment complete
+        if: success()
+        run: echo "Deployment to FTP completed successfully!"
