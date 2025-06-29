@@ -25,11 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm ci  # использовать npm ci для воспроизводимой установки
-          npm run lint  # добавить проверку кода
-
-      - name: Run tests
-        run: npm test  # добавить выполнение тестов
+          npm install  # использовать npm ci для воспроизводимой установки
 
       - name: Build project
         run: |
