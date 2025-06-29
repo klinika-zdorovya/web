@@ -20,6 +20,9 @@ jobs:
       - name: Build project
         run: npm run generate  # или npm run build для SSR
 
+      - name: Debug folder structure
+        run: find . -type d
+
       - name: Verify output
         run: |
           echo "Current directory:"
