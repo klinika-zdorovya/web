@@ -51,7 +51,7 @@ jobs:
 
       - name: FTP Deploy
         if: success()
-        uses: SamKirkland/FTP-Deploy-Action@v4  # обновленная версия action
+        uses: SamKirkland/FTP-Deploy-Action@4.2.0  # обновленная версия action
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
