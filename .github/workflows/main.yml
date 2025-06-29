@@ -15,17 +15,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # обновленная версия action
+        uses: actions/checkout@v2  # обновленная версия action
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
           node-version: '20'  # указать конкретную версию Node.js
-          cache: 'npm'  # включить кэширование зависимостей
 
       - name: Install dependencies
         run: |
-          npm install  # использовать npm ci для воспроизводимой установки
+          npm install 
 
       - name: Build project
         run: |
