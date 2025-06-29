@@ -1,39 +1,38 @@
-on:
-  push:
-  workflow_dispatch:
+name: Deploy to FTP
 
-name: Deploy website on push
+on: push
 
 jobs:
-  web-deploy:
-    name: Deploy
+  deploy:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Get latest code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Use Node.js
-        uses: actions/setup-node@v2
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: 20
 
       - name: Install dependencies
         run: npm install
 
-      - name: Generate with debug
-        run: |
-            npm run generate
-            echo "Build finished, checking output..."
-            ls -la .output || echo "No output dir"
-            ls -la .output/public || echo "No public dir"
-            ls -la .dist || echo "No dist dir"
+      - name: Build project
+        run: npm run generate
 
-      - name: Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.2.0
+      - name: Verify output
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Contents:"
+          ls -R .output
+
+      - name: FTP Deploy
+        if: success()
+        uses: SamKirkland/FTP-Deploy-Action@v4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: .output/public/
+          local-dir: ./.output/public/  # Обратите внимание на точку в начале
           server-dir: /
-          dangerous-clean-slate: true
