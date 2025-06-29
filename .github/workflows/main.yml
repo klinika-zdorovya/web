@@ -23,6 +23,12 @@ jobs:
       - name: Run generate script
         run: npm run generate
 
+      - name: Verify generated files
+        run: |
+          ls -la .output
+          ls -la .output/public
+          ls -la dist
+
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
