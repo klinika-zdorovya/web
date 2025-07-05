@@ -35,6 +35,7 @@
 
 <script setup>
 import {useFormatText} from '~/composable/format';
+import {computed} from 'vue';
 
 const format = useFormatText();
 const route = useRoute();
@@ -42,6 +43,10 @@ const route = useRoute();
 const {data: page} = await useAsyncData('publication-' + route.path, () => {
   return queryCollection('publications').path(route.path).first();
 })
+
+useHead({
+  title: computed(() => page.value?.title || 'Публикации')
+});
 
 if (!page.value) {
   throw createError({statusCode: 404, statusMessage: 'Page not found', fatal: false});
