@@ -25,13 +25,13 @@
 </template>
 
 <script setup>
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 25;
 const route = useRoute();
 
 const currentPage = computed(() => {
   const page = parseInt(route.params.page) || 1;
   return page > 0 ? page : 1;
-})
+});
 
 const { data: publicationsData } = await useAsyncData(
     `publications-${currentPage.value}`,
@@ -47,11 +47,11 @@ const { data: publicationsData } = await useAsyncData(
 
       return { publications, total };
     }
-)
+);
 
 const totalPages = computed(() =>
     Math.ceil(publicationsData.value?.total / ITEMS_PER_PAGE) || 1
-)
+);
 
 if (currentPage.value > totalPages.value) {
   throw createError({ statusCode: 404, statusMessage: 'Страница не найдена' });
