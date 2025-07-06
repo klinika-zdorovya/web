@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 const route = useRoute();
 
 const currentPage = computed(() => {
