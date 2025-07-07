@@ -40,8 +40,13 @@ import {computed} from 'vue';
 const format = useFormatText();
 const route = useRoute();
 
+const slugPath = computed(() => {
+  const slug = route.params.slug;
+  return Array.isArray(slug) ? slug.join('/') : slug;
+});
+
 const {data: page} = await useAsyncData('publication-' + route.path, () => {
-  return queryCollection('publications').path(route.path).first();
+  return queryCollection('publications').path(`/publications/${slugPath.value}`).first();
 })
 
 useHead({
