@@ -281,7 +281,6 @@ body:
 [![альтернативный текст](/images/logo.jpg)](https://example.com)
 
 ## HTML
-```html
 <img src="path/to/image" alt="Описание">
 ```
 
