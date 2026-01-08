@@ -39,7 +39,9 @@ export default defineNuxtConfig({
   },
   plugins: ['./app/plugins/yandex-maps.client.ts'],
   routeRules: {
-    '/publications/list/:page': { prerender: true },
+    '/publications/list/1': {
+      redirect: '/publications/list',
+    }
   },
 
   // SEO оптимизация
