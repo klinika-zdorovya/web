@@ -78,6 +78,7 @@ import {ref, provide, computed} from 'vue';
 import LogoMain from '~/components/LogoMain.vue';
 import MainFooter from '~/components/MainFooter.vue';
 import {useRoute} from 'vue-router';
+import {useStructuredData} from '~/composable/useStructuredData';
 
 const route = useRoute();
 const isHomePage = computed(() => route.path === '/');
@@ -87,6 +88,8 @@ const transitionName = computed(() =>
 const isMenuOpen = ref(false);
 const isMobile = ref(false);
 const openItem = ref(null);
+
+const {getAllStructuredData} = useStructuredData();
 
 const setOpenItem = (path) => {
   openItem.value = path;
@@ -111,6 +114,22 @@ const checkMobile = () => {
   isMobile.value = window.innerWidth < 768;
 }
 
+// Функция для получения заголовка страницы
+const getPageTitle = (path) => {
+  const titles = {
+    '/clinic/about': 'О клинике',
+    '/clinic/doctors': 'Наши специалисты',
+    '/clinic/documents': 'Документы',
+    '/dimensions/physculture': 'Лечебная физкультура',
+    '/pricelist': 'Цены на услуги',
+    '/publications/list': 'Публикации',
+    '/questions': 'Вопрос-ответ',
+    '/reviews': 'Отзывы',
+    '/news/list': 'Новости',
+    '/contacts': 'Контакты'
+  };
+  return titles[path] || null;
+};
 
 // Блокировка скролла при открытом меню
 watch(isMenuOpen, (val) => {
@@ -129,7 +148,42 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', checkMobile);
 });
 
+useHead({
+  title: computed(() => {
+    const pageTitle = route.meta.title || getPageTitle(route.path);
+    return pageTitle ? `${pageTitle} | Клиника здоровья` : 'Клиника "Передовые технологии здоровья"';
+  }),
 
+  meta: [
+    {
+      name: 'description',
+      content: 'Клиника мануальной терапии в Санкт-Петербурге. Лечение заболеваний опорно-двигательного аппарата, реабилитация после травм, лечебная физкультура.'
+    },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:site_name', content: 'Клиника "Передовые технологии здоровья"' },
+    {
+      property: 'og:title',
+      content: computed(() => {
+        const pageTitle = route.meta.title || getPageTitle(route.path);
+        return pageTitle ? `${pageTitle} | Клиника здоровья` : 'Клиника "Передовые технологии здоровья"';
+      })
+    },
+    { property: 'og:image', content: '/images/og-image.jpg' },
+    { property: 'og:url', content: computed(() => `${'https://klinika-zdorovya.ru'}${route.path}`) },
+    { name: 'robots', content: 'index, follow' }
+  ],
+
+  script: computed(() => {
+    return getAllStructuredData().map(data => ({
+      type: 'application/ld+json',
+      children: JSON.stringify(data)
+    }));
+  }),
+
+  htmlAttrs: {
+    lang: 'ru'
+  }
+});
 
 </script>
 
