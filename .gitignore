@@ -24,3 +24,6 @@ logs
 !.env.example
 
 pnpm-lock.yaml
+
+# Legacy/personal material from old Klinika/ folder — not part of the app, kept for reference
+legacy-docs/

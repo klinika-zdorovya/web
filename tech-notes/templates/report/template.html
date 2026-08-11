@@ -1,0 +1,135 @@
+<!--
+  Шаблон клиентского отчёта. Копировать в новый файл, заполнить содержимое
+  (везде, где написано ЗАПОЛНИ), собрать через build.py — см. README.md
+  в этой же папке. Секции необязательны: убирай/добавляй <section> по
+  смыслу, но не меняй классы — они завязаны на style.css.
+-->
+<title>ЗАПОЛНИ: короткий заголовок для вкладки браузера</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+__FONTS_CSS__
+__REPORT_STYLE_CSS__
+</style>
+
+<div class="page">
+
+  <p class="eyebrow">Технический отчёт · сайт клиники</p>
+  <h1>ЗАПОЛНИ: заголовок отчёта одной строкой — что сделано</h1>
+
+  <div class="meta-row">
+    <div class="meta-item">
+      <span class="meta-label">Дата</span>
+      <span class="meta-value">ЗАПОЛНИ: 1 января 2027</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Объект</span>
+      <span class="meta-value mono">ЗАПОЛНИ: домен/сервис</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Подготовил</span>
+      <span class="meta-value">Роман Пальмин</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Статус</span>
+      <!--
+        "Решено" — зелёный чип (--good/--good-soft), как ниже.
+        Если статус ещё открыт/в процессе — не красить в --accent (он
+        декоративный, не статусный): завести на этот случай отдельные
+        токены --warn/--warn-soft в style.css, а не тянуть их сюда inline.
+      -->
+      <span class="status-chip">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5L8 14.5L16 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Решено
+      </span>
+    </div>
+  </div>
+
+  <section>
+    <div class="summary-card">
+      <p class="lede">ЗАПОЛНИ: 3–5 предложений — что было не так, что оказалось причиной, что сделано и что сейчас работает. Это единственный абзац, который прочитают гарантированно — остальное для тех, кому нужны детали.</p>
+    </div>
+  </section>
+
+  <!--
+    Раздел «Ход работ» — только если это ДЕЙСТВИТЕЛЬНО хронология (что
+    сделали по шагам). Не превращай в список работ «для галочки», если
+    порядок не несёт смысла — тогда используй обычный текст/список без
+    .timeline.
+  -->
+  <section>
+    <h2><span class="h2-num">01</span> Ход работ</h2>
+    <ol class="timeline">
+      <li class="done">
+        <p class="t-title">ЗАПОЛНИ: шаг 1</p>
+        <p class="t-desc">ЗАПОЛНИ: короткое описание. <strong>Важные термины/значения</strong> — жирным.</p>
+      </li>
+      <li class="done">
+        <p class="t-title">ЗАПОЛНИ: шаг 2</p>
+        <p class="t-desc">ЗАПОЛНИ: короткое описание.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!--
+    Раздел с доказательствами/результатами. Скриншот — если есть, что
+    показать визуально (сайт открылся, интерфейс работает). Если нет
+    скриншота — просто убрать .browser-frame целиком, оставить .facts.
+  -->
+  <section>
+    <h2><span class="h2-num">02</span> Результат проверки</h2>
+
+    <div class="browser-frame">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-url">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M5 9V6.5a5 5 0 0110 0V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="4" y="9" width="12" height="8.5" rx="2" stroke="currentColor" stroke-width="1.6"/></svg>
+          <b>ЗАПОЛНИ: https://адрес</b>
+        </div>
+      </div>
+      <img src="data:image/jpeg;base64,__HERO_IMAGE_B64__" alt="ЗАПОЛНИ: описание скриншота" width="1000" height="563">
+    </div>
+
+    <div class="facts" style="margin-top:22px;">
+      <div class="fact-row">
+        <div class="fact-label">ЗАПОЛНИ: метка</div>
+        <div class="fact-value">ЗАПОЛНИ: значение (моноширинным — цифры, версии, id)</div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">ЗАПОЛНИ: метка</div>
+        <div class="fact-value">ЗАПОЛНИ: значение <span class="ok">· короткая ремарка зелёным</span></div>
+      </div>
+    </div>
+
+    <ul class="check-list">
+      <li>
+        <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M6 10.3l2.5 2.5L14 7.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        ЗАПОЛНИ: что именно проверено и подтверждено
+      </li>
+    </ul>
+  </section>
+
+  <!-- Необязательный раздел — не срочные рекомендации на будущее.
+       Убрать, если предъявлять нечего. -->
+  <section>
+    <h2><span class="h2-num">03</span> Рекомендации на будущее</h2>
+    <p class="muted" style="margin-bottom:18px;">Не срочно и не влияет на текущий результат — учесть при следующей плановой работе.</p>
+    <ul class="reco-list">
+      <li>
+        <span class="reco-marker">1</span>
+        <div>
+          <p class="reco-title">ЗАПОЛНИ: заголовок рекомендации</p>
+          <p class="reco-desc">ЗАПОЛНИ: пояснение.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <div>
+      <p class="sig">Роман Пальмин</p>
+      <p class="sig-meta">ЗАПОЛНИ: краткая роль/контекст · дата</p>
+    </div>
+    <p class="footer-note">ЗАПОЛНИ: одна строка — по какому поводу отчёт</p>
+  </footer>
+
+</div>
