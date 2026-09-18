@@ -1,0 +1,9 @@
+{
+  "name": "kz-report-template",
+  "private": true,
+  "type": "module",
+  "description": "Рендер PDF для шаблона клиентских отчётов Клиники здоровья",
+  "dependencies": {
+    "playwright": "^1.62.1"
+  }
+}
