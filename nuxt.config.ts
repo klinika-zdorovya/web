@@ -41,6 +41,13 @@ export default defineNuxtConfig({
   routeRules: {
     '/publications/list/1': {
       redirect: '/publications/list',
+    },
+    // Страницы разделов без своего index.html отдавали 403 на хостинге
+    '/publications': {
+      redirect: '/publications/list/',
+    },
+    '/news': {
+      redirect: '/news/list/',
     }
   },
 

@@ -1,6 +1,6 @@
 // Запускается после `nuxt generate`: строит sitemap.xml по реально собранным страницам,
 // поэтому карта сайта всегда совпадает с тем, что выложено на хостинг.
-import { readdirSync, statSync, writeFileSync } from 'node:fs';
+import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 
 const SITE_URL = process.env.NUXT_PUBLIC_SITE_URL || 'https://klinika-zdorovya.spb.ru';
@@ -14,6 +14,8 @@ const walk = (dir) => {
     if (statSync(full).isDirectory()) {
       if (!SKIP.has(name)) walk(full);
     } else if (name === 'index.html') {
+      // Заглушки-редиректы (meta refresh) в карту сайта не попадают
+      if (readFileSync(full, 'utf8').includes('http-equiv="refresh"')) continue;
       const rel = relative(ROOT, dir).split(sep).join('/');
       urls.push(rel === '' ? '/' : `/${rel}/`);
     }
