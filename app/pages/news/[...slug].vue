@@ -27,14 +27,21 @@
 
 <script setup lang="ts">
 import {useFormatText} from '~/composable/format';
+import {normalizeContentPath} from '~/composable/contentPath';
+definePageMeta({ ownHeading: true });
 const format = useFormatText();
 const route = useRoute();
+const contentPath = normalizeContentPath(route.path);
 
-const { data: page } = await useAsyncData('page-' + route.path, () => {
-  return queryCollection('news').path(route.path).first();
+const { data: page } = await useAsyncData('page-' + contentPath, () => {
+  return queryCollection('news').path(contentPath).first();
 })
 
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: false });
 }
+
+useHead({
+  title: computed(() => page.value?.title ? `${page.value.title} | Клиника здоровья` : 'Новости'),
+});
 </script>

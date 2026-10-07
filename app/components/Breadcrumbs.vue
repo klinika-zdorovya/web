@@ -1,6 +1,6 @@
 <template>
   <nav class="text-sm flex flex-col justify-center text-gray-200 uppercase leading-tight">
-    <h1 class="">{{ crumbs[crumbs.length - 1].title }}</h1>
+    <component :is="route.meta.ownHeading ? 'p' : 'h1'">{{ crumbs[crumbs.length - 1].title }}</component>
     <ol class="flex flex-wrap items-center gap-2 line-clamp-1 whitespace-nowrap">
       <li v-for="(crumb, index) in crumbs" :key="crumb.path">
         <NuxtLink

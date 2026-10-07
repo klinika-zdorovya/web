@@ -37,15 +37,17 @@
 import {useFormatText} from '~/composable/format';
 import {computed} from 'vue';
 
+definePageMeta({ ownHeading: true });
 const format = useFormatText();
 const route = useRoute();
 
 const slugPath = computed(() => {
   const slug = route.params.slug;
-  return Array.isArray(slug) ? slug.join('/') : slug;
+  const parts = Array.isArray(slug) ? slug : [slug];
+  return parts.filter(Boolean).join('/');
 });
 
-const {data: page} = await useAsyncData('publication-' + route.path, () => {
+const {data: page} = await useAsyncData('publication-' + slugPath.value, () => {
   return queryCollection('publications').path(`/publications/${slugPath.value}`).first();
 })
 
