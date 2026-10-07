@@ -1,0 +1,176 @@
+<!--
+  Отчёт по шаблону tech-notes/templates/report/. Собирается: build.py -> render_pdf.mjs
+  (см. README.md шаблона). Скриншота нет, поэтому рамки браузера в отчёте нет.
+-->
+<title>Отчёт: сайт клиники подготовлен к индексации в поиске</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+__FONTS_CSS__
+__REPORT_STYLE_CSS__
+</style>
+
+<div class="page">
+
+  <p class="eyebrow">Технический отчёт · сайт клиники</p>
+  <h1>Сайт сделан видимым для поисковых систем: теперь у каждой страницы есть содержимое, заголовок и описание</h1>
+
+  <div class="meta-row">
+    <div class="meta-item">
+      <span class="meta-label">Дата</span>
+      <span class="meta-value">7–8 октября 2026</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Объект</span>
+      <span class="meta-value mono">klinika-zdorovya.spb.ru</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Подготовил</span>
+      <span class="meta-value">Роман Пальмин</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Статус</span>
+      <span class="status-chip">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5L8 14.5L16 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Работы выполнены
+      </span>
+    </div>
+  </div>
+
+  <section>
+    <div class="summary-card">
+      <p class="lede">Страницы сайта открывались у посетителей, но поисковые роботы видели вместо них пустой лист: ни заголовка, ни текста, один и тот же файл по любому адресу. Поэтому сайт плохо индексировался. Мы изменили сборку сайта: теперь каждая страница заранее содержит свой текст, заголовок и описание. Заодно исправлены ошибки открытия страниц по прямой ссылке, добавлены карта сайта и файл для роботов, убран адрес чужого домена. Изменения выложены на сайт и проверены. <strong>Как быстро это отразится в поисковой выдаче, зависит от самих поисковых систем: обычно от нескольких дней до нескольких недель. Результат проверим по поиску и сообщим отдельно.</strong></p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="h2-num">01</span> Что было и что стало</h2>
+    <div class="facts">
+      <div class="fact-row">
+        <div class="fact-label">Содержимое страницы для робота</div>
+        <div class="fact-value">было: пустая страница (≈3 КБ), без текста · стало: полный текст страницы <span class="ok">· например, у публикации около 50 КБ</span></div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Заголовок и описание</div>
+        <div class="fact-value">было: общие или отсутствовали · стало: у каждой страницы свои <span class="ok">· 72 страницы</span></div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Карта сайта и файл для роботов</div>
+        <div class="fact-value">было: адреса отдавали пустую страницу вместо файлов · стало: настоящие файлы <span class="ok">· 72 адреса в карте</span></div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Несуществующий адрес</div>
+        <div class="fact-value">было: отвечал «страница найдена» (200), робот мог принять его за настоящую страницу · стало: честная ошибка 404</div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Основной адрес страницы</div>
+        <div class="fact-value">было: не указан · стало: указан у каждой страницы (<span class="mono">https://klinika-zdorovya.spb.ru/…/</span>)</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="h2-num">02</span> Ход работ</h2>
+    <ol class="timeline">
+      <li class="done">
+        <p class="t-title">Диагностика: что видит поисковый робот</p>
+        <p class="t-desc">Проверили сайт так, как его видит робот, без выполнения программ в браузере: вместо статьи пришёл <strong>пустой контейнер</strong>, без заголовка и текста, один и тот же по любому адресу.</p>
+      </li>
+      <li class="done">
+        <p class="t-title">Решение: заранее готовые страницы</p>
+        <p class="t-desc">Сборка переключена так, что <strong>для каждой страницы заранее создаётся готовый файл с текстом</strong>. Хостинг прежний, ничего переносить не нужно.</p>
+      </li>
+      <li class="done">
+        <p class="t-title">Исправлена ошибка при прямом открытии страницы</p>
+        <p class="t-desc">Воспроизвели сбой: статья по ссылке с косой чертой в конце адреса (так по умолчанию работает хостинг) показывала «404». Причина найдена и устранена. Проверено на 16 страницах разных типов, обе формы адреса.</p>
+      </li>
+      <li class="done">
+        <p class="t-title">Проверка на копии вашего хостинга</p>
+        <p class="t-desc">Правила хостинга (<span class="mono">.htaccess</span>) проверили на копии серверного окружения. Нашли две проблемы: <strong>несуществующие адреса отвечали как существующие</strong>, а переадресация без косой черты уходила на небезопасный <span class="mono">http://</span>. Новые правила установлены.</p>
+      </li>
+      <li class="done">
+        <p class="t-title">Подготовка к индексации</p>
+        <p class="t-desc">Уникальные <strong>заголовки</strong> и <strong>описания</strong> страниц, основной адрес каждой страницы, один главный заголовок на странице, файл для роботов и <strong>карта сайта</strong>, которая обновляется автоматически при каждой публикации.</p>
+      </li>
+      <li class="done">
+        <p class="t-title">Найден и исправлен чужой домен в разметке</p>
+        <p class="t-desc">В служебной разметке был указан адрес <span class="mono">klinika-zdorovya.ru</span>, где открывается <strong>другой сайт</strong> (не клиника). Теперь везде основной адрес <span class="mono">klinika-zdorovya.spb.ru</span>; почта на чужом домене убрана.</p>
+      </li>
+      <li class="done">
+        <p class="t-title">Публикация и проверка на рабочем сайте</p>
+        <p class="t-desc">Два релиза (<span class="mono">v1.2.0</span>, <span class="mono">v1.2.1</span>), после каждого сайт проверен на рабочем адресе. Дополнительно добавлена новость от 1 сентября 2026 «С Днём знаний!» в стиле остальных.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2><span class="h2-num">03</span> Результат проверки</h2>
+
+    <div class="facts">
+      <div class="fact-row">
+        <div class="fact-label">Страниц в карте сайта</div>
+        <div class="fact-value">72 <span class="ok">· главная, разделы, новости, публикации</span></div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Выпуски на сайте</div>
+        <div class="fact-value">v1.2.0 (7 октября), v1.2.1 (8 октября) <span class="ok">· оба прошли автоматическую проверку и публикацию</span></div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Открытие страницы по прямой ссылке</div>
+        <div class="fact-value">с косой чертой и без: работает <span class="ok">· 16 страниц разных типов</span></div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Несуществующий адрес</div>
+        <div class="fact-value">ответ 404 <span class="ok">· корректно</span></div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-label">Переадресация без косой черты</div>
+        <div class="fact-value">на защищённый <span class="mono">https://</span> с косой чертой <span class="ok">· корректно</span></div>
+      </div>
+    </div>
+
+    <ul class="check-list">
+      <li>
+        <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M6 10.3l2.5 2.5L14 7.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>На рабочем сайте у проверенных страниц есть текст, заголовок, описание и основной адрес; все описания у проверенных страниц разные.</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M6 10.3l2.5 2.5L14 7.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Страницы проверены в браузере: содержимое отображается, ошибок при загрузке не обнаружено.</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M6 10.3l2.5 2.5L14 7.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Появление страниц в поиске пока <strong>не проверялось</strong>: для этого нужно время. Проверка по поиску запланирована.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="h2-num">04</span> Что понадобится от клиники и рекомендации</h2>
+    <p class="muted" style="margin-bottom:18px;">Не мешает работе сайта; решения за клиникой.</p>
+    <ul class="reco-list">
+      <li>
+        <span class="reco-marker">1</span>
+        <div>
+          <p class="reco-title">Подключить Яндекс Вебмастер и Google Search Console</p>
+          <p class="reco-desc">Это бесплатные сервисы поисковых систем. Подтвердив в них владение сайтом и отправив карту сайта (<span class="mono">/sitemap.xml</span>), можно ускорить индексацию и видеть, какие страницы попали в поиск. Подключение выполним по вашему согласию.</p>
+        </div>
+      </li>
+      <li>
+        <span class="reco-marker">2</span>
+        <div>
+          <p class="reco-title">Назвать публичный адрес электронной почты клиники</p>
+          <p class="reco-desc">В разметке сайта убран адрес на чужом домене. На домене сайта сейчас существуют только служебные ящики, публичного нет. После получения адреса вернём его в разметку.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <div>
+      <p class="sig">Роман Пальмин</p>
+      <p class="sig-meta">разработка и поддержка сайта · 8 октября 2026</p>
+    </div>
+    <p class="footer-note">Отчёт о работах по индексации сайта klinika-zdorovya.spb.ru в поисковых системах</p>
+  </footer>
+
+</div>
