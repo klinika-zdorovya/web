@@ -75,6 +75,7 @@
 
 <script setup>
 import {normalizeContentPath} from '~/composable/contentPath';
+import {sectionDescription} from '~/composable/seo';
 import {ref, provide, computed} from 'vue';
 import LogoMain from '~/components/LogoMain.vue';
 import MainFooter from '~/components/MainFooter.vue';
@@ -175,6 +176,11 @@ const canonicalUrl = computed(() => {
   return `${siteUrl}${path}`;
 });
 
+const DEFAULT_DESCRIPTION = 'Клиника мануальной терапии в Санкт-Петербурге. Лечение заболеваний опорно-двигательного аппарата, реабилитация после травм, лечебная физкультура.';
+const pageDescription = computed(() =>
+  route.meta.description || sectionDescription(normalizeContentPath(route.path)) || DEFAULT_DESCRIPTION
+);
+
 useHead({
   link: [{ rel: 'canonical', href: canonicalUrl }],
 
@@ -184,10 +190,8 @@ useHead({
   }),
 
   meta: [
-    {
-      name: 'description',
-      content: 'Клиника мануальной терапии в Санкт-Петербурге. Лечение заболеваний опорно-двигательного аппарата, реабилитация после травм, лечебная физкультура.'
-    },
+    { name: 'description', content: pageDescription },
+    { property: 'og:description', content: pageDescription },
     { property: 'og:type', content: 'website' },
     { property: 'og:site_name', content: 'Клиника "Передовые технологии здоровья"' },
     {

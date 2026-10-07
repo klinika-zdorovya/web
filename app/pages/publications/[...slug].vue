@@ -36,6 +36,7 @@
 <script setup>
 import {useFormatText} from '~/composable/format';
 import {computed} from 'vue';
+import {truncateDescription} from '~/composable/seo';
 
 definePageMeta({ ownHeading: true });
 const format = useFormatText();
@@ -51,8 +52,19 @@ const {data: page} = await useAsyncData('publication-' + slugPath.value, () => {
   return queryCollection('publications').path(`/publications/${slugPath.value}`).first();
 })
 
+const description = computed(() => {
+  const annotation = truncateDescription(page.value?.annotation);
+  if (annotation) return annotation;
+  const authors = page.value?.authors ? ` Авторы: ${page.value.authors}.` : '';
+  return truncateDescription(`${page.value?.title ?? 'Публикация'}.${authors}`);
+});
+
 useHead({
-  title: computed(() => page.value?.title || 'Публикации')
+  title: computed(() => page.value?.title || 'Публикации'),
+  meta: [
+    { name: 'description', content: description },
+    { property: 'og:description', content: description },
+  ],
 });
 
 if (!page.value) {
