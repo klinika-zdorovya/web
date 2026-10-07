@@ -3,7 +3,7 @@ export const useStructuredData = () => {
     const route = useRoute();
     const config = useRuntimeConfig();
 
-    const siteUrl = computed(() => config.public.siteUrl || 'https://klinika-zdorovya.ru');
+    const siteUrl = computed(() => config.public.siteUrl || 'https://klinika-zdorovya.spb.ru');
     const isHomePage = computed(() => route.path === '/');
 
     const generateOrganizationData = () => {
@@ -16,7 +16,6 @@ export const useStructuredData = () => {
             'url': siteUrl.value,
             'logo': `${siteUrl.value}/images/logo/logo.png`,
             'telephone': '+7 (921) 904-27-67',
-            'email': 'info@klinika-zdorovya.ru',
             'address': {
                 '@type': 'PostalAddress',
                 'streetAddress': 'Литейный пр., д. 43',

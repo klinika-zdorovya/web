@@ -10,9 +10,16 @@
 статическая генерация (SSG), контент хранится в git как Markdown/YAML/JSON.
 Полное описание — `documentation/Chapter 1. Introduction/Introduction.md`.
 
-**Стек:** Nuxt 3 (Vue 3, `ssr: false`, compatibilityVersion 4), Nuxt Content 3,
-Tailwind CSS, `@nuxtjs/color-mode`, `better-sqlite3` (используется Content для
-индексации). Пакетный менеджер — **pnpm**.
+**Стек:** Nuxt 3 (Vue 3, `ssr: true` при `generate`, т.е. SSG: готовый HTML
+каждой страницы, compatibilityVersion 4), Nuxt Content 3, Tailwind CSS,
+`@nuxtjs/color-mode`, `better-sqlite3` (используется Content для индексации).
+Пакетный менеджер — **pnpm**. **Сборка только на Node 20** (как в CI): на
+Node 24 падает нативный модуль `better-sqlite3`.
+
+**Домен:** боевой сайт — `https://klinika-zdorovya.spb.ru`. Домен
+`klinika-zdorovya.ru` принадлежит **другому** сайту (не клиника), не использовать
+его в `siteUrl`, `canonical`, разметке. Локальный `.env` (вне git) должен
+содержать `NUXT_PUBLIC_SITE_URL=https://klinika-zdorovya.spb.ru`.
 
 ## Команды
 
@@ -20,7 +27,8 @@ Tailwind CSS, `@nuxtjs/color-mode`, `better-sqlite3` (используется C
 pnpm install
 pnpm dev        # http://localhost:3000
 pnpm build
-pnpm generate    # статическая генерация — то, что реально деплоится
+pnpm generate    # статическая генерация — то, что реально деплоится;
+                 # после неё scripts/generate-sitemap.mjs строит sitemap.xml
 pnpm preview
 ```
 
@@ -87,6 +95,20 @@ pnpm preview
   реальная папка документации называется `documentation/**` — правки в
   `documentation/` сейчас всё равно триггерят полный деплой. Не чинить молча,
   спросить перед изменением workflow-файла.
+
+## Индексация и SEO (важно при правках)
+
+- Страницы читают контент через `queryCollection(...).path(...)`; путь всегда
+  нормализуем через `normalizeContentPath` (`app/composable/contentPath.ts`):
+  адрес со слэшем в конце иначе даёт 404 после загрузки страницы.
+- На странице должен быть один `<h1>`. У статей (новости, публикации) свой
+  заголовок, поэтому они ставят `definePageMeta({ ownHeading: true })`, и
+  хлебные крошки выводят название раздела обычным абзацем.
+- `<title>` берётся из `getPageTitle` в `app/layouts/default.vue` (разделы) или
+  из самой страницы (`useHead` на странице); `canonical` и `og:url` строятся
+  от `siteUrl` со слэшем в конце.
+- `.htaccess` хостинга в репозитории нет (лежит на хостинге). Подробности и
+  проверки — `tech-notes/docs/2026-10-07/zhurnal-ssr-indexirovanie.md`.
 
 ## Самодокументирование
 

@@ -74,6 +74,7 @@
 </template>
 
 <script setup>
+import {normalizeContentPath} from '~/composable/contentPath';
 import {ref, provide, computed} from 'vue';
 import LogoMain from '~/components/LogoMain.vue';
 import MainFooter from '~/components/MainFooter.vue';
@@ -117,10 +118,20 @@ const checkMobile = () => {
 // Функция для получения заголовка страницы
 const getPageTitle = (path) => {
   const titles = {
+    '/clinic': 'Клиника',
     '/clinic/about': 'О клинике',
+    '/clinic/history': 'История создания',
     '/clinic/doctors': 'Наши специалисты',
     '/clinic/documents': 'Документы',
+    '/clinic/manifest': 'Наш манифест',
+    '/dimensions': 'Направления',
     '/dimensions/physculture': 'Лечебная физкультура',
+    '/dimensions/reabilitation': 'Реабилитация пациентов с неврологическими заболеваниями',
+    '/dimensions/provision': 'Обеспечение спортивных мероприятий',
+    '/dimensions/therapy': 'Терапевтическое направление',
+    '/patients': 'Посетителям и пациентам',
+    '/patients/useful-tips': 'Полезные советы',
+    '/patients/orthopedic-products': 'Ортопедическая продукция',
     '/pricelist': 'Цены на услуги',
     '/publications/list': 'Публикации',
     '/questions': 'Вопрос-ответ',
@@ -128,7 +139,16 @@ const getPageTitle = (path) => {
     '/news/list': 'Новости',
     '/contacts': 'Контакты'
   };
-  return titles[path] || null;
+  const normalized = normalizeContentPath(path);
+  if (titles[normalized]) return titles[normalized];
+
+  // страницы-списки: /news/list/2, /publications/list/3
+  const pageMatch = normalized.match(/^\/(news|publications)\/list\/(\d+)$/);
+  if (pageMatch) {
+    const name = pageMatch[1] === 'news' ? 'Новости' : 'Публикации';
+    return `${name}, страница ${pageMatch[2]}`;
+  }
+  return null;
 };
 
 // Блокировка скролла при открытом меню
@@ -148,7 +168,16 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', checkMobile);
 });
 
+const siteUrl = useRuntimeConfig().public.siteUrl;
+// Канонический адрес: с завершающим слэшем (так отдаёт папки статический хостинг).
+const canonicalUrl = computed(() => {
+  const path = route.path.endsWith('/') ? route.path : `${route.path}/`;
+  return `${siteUrl}${path}`;
+});
+
 useHead({
+  link: [{ rel: 'canonical', href: canonicalUrl }],
+
   title: computed(() => {
     const pageTitle = route.meta.title || getPageTitle(route.path);
     return pageTitle ? `${pageTitle} | Клиника здоровья` : 'Клиника "Передовые технологии здоровья"';
@@ -169,7 +198,7 @@ useHead({
       })
     },
     { property: 'og:image', content: '/images/og-image.jpg' },
-    { property: 'og:url', content: computed(() => `${'https://klinika-zdorovya.ru'}${route.path}`) },
+    { property: 'og:url', content: canonicalUrl },
     { name: 'robots', content: 'index, follow' }
   ],
 
