@@ -1,0 +1,10 @@
+# Сайт собран как статика (nuxt generate, ssr: true): у каждой страницы своя папка с index.html.
+ErrorDocument 404 /404.html
+
+# Адрес папки без слэша: редирект на https со слэшем.
+# Без этого прокси хостинга подставляет http:// в редирект Apache.
+DirectorySlash Off
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !/$
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1/ [R=301,L]
