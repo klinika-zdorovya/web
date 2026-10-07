@@ -28,6 +28,7 @@
 <script setup lang="ts">
 import {useFormatText} from '~/composable/format';
 import {normalizeContentPath} from '~/composable/contentPath';
+import {truncateDescription} from '~/composable/seo';
 definePageMeta({ ownHeading: true });
 const format = useFormatText();
 const route = useRoute();
@@ -43,5 +44,9 @@ if (!page.value) {
 
 useHead({
   title: computed(() => page.value?.title ? `${page.value.title} | Клиника здоровья` : 'Новости'),
+  meta: [
+    { name: 'description', content: computed(() => truncateDescription(page.value?.preview)) },
+    { property: 'og:description', content: computed(() => truncateDescription(page.value?.preview)) },
+  ],
 });
 </script>
