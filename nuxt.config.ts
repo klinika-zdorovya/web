@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
   compatibilityDate: '2024-04-03',
-  ssr: false,
+  ssr: true,
   experimental: {
     payloadExtraction: false
   },
@@ -34,7 +34,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       yandexMapsApiKey: '1c0b9327-7844-434a-a494-cfe26e5759de', //process.env.YANDEX_MAPS_API_KEY
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://klinika-zdorovya.ru',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://klinika-zdorovya.spb.ru',
     }
   },
   plugins: ['./app/plugins/yandex-maps.client.ts'],
