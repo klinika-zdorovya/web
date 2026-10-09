@@ -27,3 +27,5 @@ pnpm-lock.yaml
 
 # Legacy/personal material from old Klinika/ folder — not part of the app, kept for reference
 legacy-docs/
+# Личные заметки по клинике (переписка, оплата) — не для публичного репозитория
+tech-notes-private/
